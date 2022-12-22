@@ -19,7 +19,9 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable()->default('null');
             $table->string('password');
-            $table->enum('account_type',['standard','extended'])->default('standard');
+            $table->integer('offersCredit')->default(4);
+            $table->enum('accountRole',['standard','admin'])->default('standard');
+            $table->enum('accountType',['standard','extended'])->default('standard');
             $table->rememberToken();
             $table->timestamps();
         });
