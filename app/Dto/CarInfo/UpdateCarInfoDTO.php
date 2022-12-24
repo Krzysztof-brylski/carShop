@@ -1,6 +1,6 @@
 <?php
 namespace App\Dto\CarInfo;
-use App\Http\Requests\CarInfo\UpdateCarInfo;
+use App\Http\Requests\CarInfo;
 
 class UpdateCarInfoDTO{
 
@@ -8,15 +8,16 @@ class UpdateCarInfoDTO{
 
     /**
      * CarInfoDTO constructor.
-     * @param UpdateCarInfo $request
+     * @param array $data
      */
-    public function __construct(UpdateCarInfo $request){
+    public function __construct(array $data){
+        $model=$data['model'];
+        $type=$data['type'];
         $this->CarInfo=array(
-            "$request->model"=>array(
-                "type"=>"$request->type"
+            "$model"=>array(
+                "type"=>"$type"
             )
         );
     }
-
 
 }

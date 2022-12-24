@@ -1,6 +1,7 @@
 <?php
 namespace App\Services\CarEquipment;
 use App\Http\Requests\CarEquipment\CreateCarEquipment;
+use App\Models\CarEquipment;
 use Illuminate\Support\Facades\DB;
 
 class CarEquipmentService{
@@ -11,16 +12,15 @@ class CarEquipmentService{
      * @return array
      */
     public function index(){
-        $result = DB::table(self::tableName)->get()->first();
-        return $result;
+        return CarEquipment::all()->toArray();
     }
 
     /**
      * Store a newly created resource in storage.
-     * @param CreateCarEquipment $request
+     * @param array $data
      */
-    public function store(CreateCarEquipment $request){
-        $result= DB::table(self::tableName)->get()->first();
-        DB::table(self::tableName)->update(array_merge($result,$request->equipment));
+    public function store(array $data){
+        $equipment=CarEquipment::create($data);
+        $equipment->save();
     }
 }

@@ -15,9 +15,9 @@ class CarEquipmentController extends Controller
      * @param CarEquipmentService $carEquipmentService
      * @return JsonResponse
      */
-    public function index(CarEquipmentService $carEquipmentService){
+    public function index(){
         try{
-            $result=$carEquipmentService->index();
+            $result=(new CarEquipmentService())->index();
         }catch(\Exception $exception){
             return Response()->json(["error"=>$exception->getMessage()],422);
         }finally{
@@ -28,13 +28,12 @@ class CarEquipmentController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param CreateCarEquipment $request
-     * @param CarEquipmentService $carEquipmentService
      * @return JsonResponse
      */
-    public function store(CreateCarEquipment $request,CarEquipmentService $carEquipmentService){
-        $request->validated();
+    public function store(CreateCarEquipment $request){
+        $data=$request->validated();
         Try{
-            $carEquipmentService->store($request);
+            (new CarEquipmentService())->store($data);
         }catch(\Exception $exception){
             return Response()->json(["error"=>$exception->getMessage()],422);
         }finally{

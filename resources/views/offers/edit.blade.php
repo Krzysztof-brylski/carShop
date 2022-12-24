@@ -1,7 +1,8 @@
-<form action="{{route("Offer.store")}}" enctype="multipart/form-data" method="POST" style="display: flex;flex-direction: column;">
+<form action="{{route("Offer.update",['Offer'=>$Offer->id])}}" enctype="multipart/form-data" method="POST" style="display: flex;flex-direction: column;">
     @csrf
+    @method('PUT')
     <div>
-       cena:<input type="text " name="price">
+        cena:<input type="text " name="price">
     </div>
     <div>
         producent:<input type="text " name="manufacturer">

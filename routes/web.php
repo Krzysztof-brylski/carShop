@@ -5,6 +5,7 @@ use App\Http\Controllers\CarOffer\CarInfoController;
 use App\Http\Controllers\CarOffer\CarOfferController;
 
 
+use App\Models\CarManufacturer;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,7 +28,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // cars info
 Route::get("/carInfo",[CarInfoController::class,'index'])->name('carInfo.index');
-Route::get("/carInfo/{manufacturer}",[CarInfoController::class,'show'])->name('carInfo.show');
+Route::get("/carInfo/{CarManufacturer:name}",[CarInfoController::class,'show'])->name('carInfo.show');
 
 Route::middleware('auth')->group(function (){
     Route::resource('Offer', CarOfferController::class);
@@ -45,8 +46,9 @@ Route::middleware('auth')->group(function (){
     });
     /**all users actions**/
     //carInfo store and update
-    Route::post("/carInfo",[CarInfoController::class,'store'])->name("carInfo.store");
-    Route::post("/carInfo/{manufacturer}/update",[CarInfoController::class,'update'])->name("carInfo.edit");
+    Route::post("/carInfo/storeManufacturer",[CarInfoController::class,'storeManufacturer'])->name("carInfo.storeManufacturer");
+    Route::post("/carInfo/storeModel",[CarInfoController::class,'storeModel'])->name("carInfo.storeModel");
+    Route::post("/carInfo/storeVersion",[CarInfoController::class,'storeVersion'])->name("carInfo.storeVersion");
     //carEquipment store
     Route::get("/carEquipment",[CarEquipmentController::class,'index'])->name("carEquipment.index");
     Route::post("/carEquipment",[CarEquipmentController::class,'store'])->name("carEquipment.store");

@@ -1,79 +1,85 @@
 <?php
 namespace App\Http\Controllers\CarOffer;
 
+use App\Dto\CarInfo\CarModelsDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CarInfo\CreateCarInfo;
-use App\Http\Requests\CarInfo\UpdateCarInfo;
+use App\Http\Requests\CreateCarManufacturer;
+use App\Http\Requests\CreateCarModel;
+use App\Http\Requests\CreateCarVersion;
+use App\Models\CarManufacturer;
 use App\Services\CarInfo\CarInfoService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\DB;
+
 
 
 class CarInfoController extends Controller
 {
-    const tableName="car_manufacturer";
+
     /**
      * Display a listing of the resource.
      * @return JsonResponse
      */
     public function index(){
-        Try{
-            $result = DB::table(self::tableName)->get(["manufacturer"]);
-        }catch(\Exception $exception){
-            return Response()->json(["error"=>$exception->getMessage()],422);
-        }finally{
-            return Response()->json($result,200);
-        }
-
+        return Response()->json(CarManufacturer::get(["name"])->toArray(),200);
     }
 
     /**
      * Display the specified resource.
-     * @param $manufacturer
+     * @param CarManufacturer $CarManufacturer
      * @return JsonResponse
      */
-    public function show($manufacturer){
-        try{
-            $result = DB::table(self::tableName)->where("manufacturer","=",$manufacturer)->get()->first();
-        }catch(\Exception $exception){
-            return Response()->json(["error"=>$exception->getMessage()],422);
-        }finally{
-            return Response()->json($result,200);
-        }
+    public function show(CarManufacturer $CarManufacturer){
+        return Response()->json((new CarModelsDTO($CarManufacturer->Model))->CarModels,200);
     }
+
     /**
      * Store a newly created resource in storage.
-     *
-     * @param CreateCarInfo $request
-     * @param CarInfoService $carInfoService
-     * @return void
+     * Register new car manufacturer
+     * @param CreateCarManufacturer $request
+     * @return JsonResponse
      */
-    public function store(CreateCarInfo $request, CarInfoService $carInfoService){
+    public function storeManufacturer(CreateCarManufacturer $request){
+        $data=$request->validated();
         try{
-            $carInfoService->store($request);
+            (new CarInfoService())->storeManufacturer($data);
         }catch (\Exception $exception){
             return Response()->json(['error'=>$exception->getMessage()],422);
+        }finally{
+            return Response()->json("ok",201);
         }
-        return Response()->json("ok",201);
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param UpdateCarInfo $request
-     * @param CarInfoService $carInfoService
-     * @param $manufacturer
-     * @return void
+     * Store a newly created resource in storage.
+     * Register new car model
+     * @param CreateCarModel $request
+     * @return JsonResponse
      */
-    public function update(UpdateCarInfo $request,CarInfoService $carInfoService ,$manufacturer)
-    {
-
+    public function storeModel(CreateCarModel $request){
+        $data=$request->validated();
         try{
-            $carInfoService->update($request, $manufacturer);
+            (new CarInfoService())->storeModel($data);
         }catch (\Exception $exception){
             return Response()->json(['error'=>$exception->getMessage()],422);
+        }finally{
+            return Response()->json("ok",201);
         }
-        return Response()->json("ok",201);
+    }
 
+    /**
+     * Store a newly created resource in storage.
+     * Register new card model version
+     * @param CreateCarVersion $request
+     * @return JsonResponse
+     */
+    public function storeVersion(CreateCarVersion $request){
+        $data=$request->validated();
+        try{
+            (new CarInfoService())->storeVersion($data);
+        }catch (\Exception $exception){
+            return Response()->json(['error'=>$exception->getMessage()],422);
+        }finally{
+            return Response()->json("ok",201);
+        }
     }
 }

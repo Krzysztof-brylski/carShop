@@ -14,7 +14,7 @@ class CreateOfferRequest extends FormRequest
      */
     public function authorize()
     {
-        return !Auth::guest();
+        return true;
     }
 
     /**
@@ -24,8 +24,18 @@ class CreateOfferRequest extends FormRequest
      */
     public function rules()
     {
+        //todo make sure  that manufacturer, model, type and equipment. exist in db!
+        //exist:car_manufacturer,
         return [
-            //
+            'price'=>'required|float|max:10',
+            'manufacturer'=>'required|string',
+            'model'=>'required|string',
+            'version'=>'required|string',
+            'description'=>'required|string|max:300',
+            'equipment'=>'required',
+            'localization'=>'required|string',
+            'images'=>'required|image',
+            'repairs'=>'nullable',
         ];
     }
 }

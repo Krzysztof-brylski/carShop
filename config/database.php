@@ -36,11 +36,11 @@ return [
     'connections' => [
         'mongodb' => [
             'driver' => 'mongodb',
-            'host'=>env('DB_HOST', '127.0.0.1'),
-            'port'=>env('DB_PORT', '27017'),
-            'username'=>env('DB_USERNAME', ''),
-            'password'=>env('DB_PASSWORD', ''),
-            'database' => env('DB_DATABASE', 'forge'),
+            'host'=>env('MONGODB_HOST', '127.0.0.1'),
+            'port'=>env('MONGODB_PORT', '27017'),
+            'username'=>env('MONGODB_USERNAME', ''),
+            'password'=>env('MONGODB_PASSWORD', ''),
+            'database' => env('MONGODB_DATABASE', 'forge'),
         ],
         'sqlite' => [
             'driver' => 'sqlite',

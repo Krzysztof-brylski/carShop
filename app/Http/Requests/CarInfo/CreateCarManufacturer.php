@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Offer;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class UpdateOfferRequest extends FormRequest
+class CreateCarManufacturer extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,10 +24,7 @@ class UpdateOfferRequest extends FormRequest
     public function rules()
     {
         return [
-            'price'=>'required|float|max:10',
-            'description'=>'required|string|max:300',
-            'localization'=>'required|string',
-            'images'=>'nullable|image',
+            "name"=>"string|unique:App\Models\CarManufacturer,name|max:50"
         ];
     }
 }

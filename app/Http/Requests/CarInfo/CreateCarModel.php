@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\CarInfo;
+namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCarInfo extends FormRequest
+class CreateCarModel extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,11 +23,9 @@ class CreateCarInfo extends FormRequest
      */
     public function rules()
     {
-        //todo make sure that all this data dont exist in db
         return [
-            'manufacturer'=>"required|",
-            'model'=>"required|",
-            'type'=>"required|",
+            "manufacturer"=>"string|exist:App\Models\CarManufacturer,name|max:50",
+            "name"=>"string|unique:App\Models\CarModel,name|max:50"
         ];
     }
 }

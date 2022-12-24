@@ -3,15 +3,16 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-//use Illuminate\Database\Eloquent\Model;
 use Jenssegers\Mongodb\Eloquent\Model;
 class Offer extends Model
-{
-
+{   protected $connection='mongodb';
+    protected $table = 'car_offer';
     protected $fillable=[
       'price',
       'manufacturer',
       'model',
+      'type',
+      'images',
       'version',
       'status',
       'author',
@@ -20,5 +21,11 @@ class Offer extends Model
       'localization',
       'repairs',
     ];
+
+    public function getAuthor(){
+        return User::find($this->author);
+    }
+
+
     use HasFactory;
 }
