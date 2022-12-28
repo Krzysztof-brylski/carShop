@@ -15,10 +15,10 @@ class CarModel extends Model
         'name'
     ];
     public function Manufacturer(){
-        $this->belongsTo(CarManufacturer::class);
+        return $this->belongsTo(CarManufacturer::class);
     }
     public function Version(){
-        $this->hasOne(CarVersion::class);
+        return $this->hasMany(CarVersion::class);
     }
 
     use HasFactory;

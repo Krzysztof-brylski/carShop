@@ -1,28 +1,16 @@
-<form action="{{route("Offer.store")}}" enctype="multipart/form-data" method="POST" style="display: flex;flex-direction: column;">
-    @csrf
-    <div>
-       cena:<input type="text " name="price">
-    </div>
-    <div>
-        producent:<input type="text " name="manufacturer">
-    </div>
-    <div>
-        model:<input type="text " name="model">
-    </div>
-    <div>
-        werisa :<input type="text " name="version">
-    </div>
-    <div>
-        opis:<input type="text " name="description">
-    </div>
-    <div>
-        wyposarzenie:<input type="text " name="equipment">
-    </div>
-    <div>
-        lokalizacja:<input type="text " name="localization">
-    </div>
-    <div>
-        zdjęcia<input type="file" name="images[]" multiple>
-    </div>
-    <input type="submit">
-</form>
+@extends('layouts.app')
+@vite(['resources/css/app.css'])
+@section('content')
+<script>
+    const ManufacturerGateWay="{{url("carInfo/manufacturer/")}}";
+    const ModelGateWay="{{url("carInfo/model/")}}";
+    const VersionGateWay="{{url("carInfo/version/")}}";
+    const CreateOfferGateWay="{{route("Offer.store")}}";
+    const CarEquipmentGateWay="{{url("carEquipment/")}}";
+</script>
+@viteReactRefresh
+@vite(['resources/js/Offer/addOffer/addOffer.jsx'])
+<div id="addOffer">
+
+</div>
+@endsection

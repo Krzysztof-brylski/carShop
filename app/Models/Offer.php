@@ -8,22 +8,19 @@ class Offer extends Model
 {   protected $connection='mongodb';
     protected $table = 'car_offer';
     protected $fillable=[
-      'price',
-      'manufacturer',
-      'model',
-      'type',
-      'images',
-      'version',
-      'status',
-      'author',
-      'description',
-      'equipment',
-      'localization',
-      'repairs',
+        'status',
+        'type',
+        'author',
+        'details',
+        'carInfo',
+        'price',
+        'description',
+        'localization',
+        'images'
     ];
 
     public function getAuthor(){
-        return User::find($this->author);
+        return User::find($this->author['id']);
     }
 
 

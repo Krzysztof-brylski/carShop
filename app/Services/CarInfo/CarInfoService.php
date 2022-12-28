@@ -1,7 +1,7 @@
 <?php
 namespace App\Services\CarInfo;
 use App\Dto\CarInfo\CarManufacturesDTO;
-use App\Dto\CarInfo\UpdateCarInfoDTO;
+use App\Dto\CarInfo\CarVersionsDTO;
 use App\Http\Requests\CarInfo\CreateCarInfo;
 use App\Http\Requests\CarInfo\UpdateCarInfo;
 use App\Models\CarManufacturer;

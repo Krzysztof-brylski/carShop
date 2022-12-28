@@ -24,17 +24,25 @@ class CreateOfferRequest extends FormRequest
      */
     public function rules()
     {
-        //todo make sure  that manufacturer, model, type and equipment. exist in db!
-        //exist:car_manufacturer,
+        //todo make sure all selected equipment exist in db!
         return [
-            'price'=>'required|float|max:10',
-            'manufacturer'=>'required|string',
-            'model'=>'required|string',
-            'version'=>'required|string',
-            'description'=>'required|string|max:300',
-            'equipment'=>'required',
+            'price'=>'required|max:10',
+            'manufacturer'=>'required|string|exists:App\Models\CarManufacturer,name|max:50',
+            'model'=>'required|string|exists:App\Models\CarModel,name|max:50',
+            'version'=>'required|string|exists:App\Models\CarVersion,name|max:50',
+            'description'=>'required|string|max:200',
+            'carPower'=>'integer|min:0',
+            'engineSize'=>'integer|min:0',
+            'images'=>'required',
+            'images.*'=>'file|image',
+            //todo add custom rule for engine type and transmission
+            'engineType'=>'string',
+            'transmission'=>'string',
+            //'equipment'=>'required',
+            //'equipment.*'=>'exists:App\Models\CarEquipment, name|max:50',
+            'phone'=>'required|string|max:9|min:9',
+            'email'=>'required|string|email',
             'localization'=>'required|string',
-            'images'=>'required|image',
             'repairs'=>'nullable',
         ];
     }

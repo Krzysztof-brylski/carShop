@@ -8,13 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class CarVersion extends Model
 {
     protected $connection='mysql';
+    protected $table='car_version';
     protected $fillable=[
         'id',
-        'Model_id',
+        'model_id',
         'name'
     ];
     public function Model(){
-        $this->belongsTo(CarModel::class);
+        return $this->belongsTo(CarModel::class);
     }
 
     use HasFactory;

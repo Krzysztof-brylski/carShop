@@ -25,7 +25,7 @@ class CreateCarEquipment extends FormRequest
     {
         //todo add unique rule
         return [
-            "equipment"=>"required"
+            "equipment"=>"required|string|unique:App\Models\CarEquipment,name|max:50"
         ];
     }
 }

@@ -27,9 +27,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // cars info
-Route::get("/carInfo",[CarInfoController::class,'index'])->name('carInfo.index');
-Route::get("/carInfo/{CarManufacturer:name}",[CarInfoController::class,'show'])->name('carInfo.show');
-
+Route::get("/carInfo/manufacturer",[CarInfoController::class,'index'])->name('carInfo.index');
+Route::get("/carInfo/model/{CarManufacturer:name}",[CarInfoController::class,'show'])->name('carInfo.show');
+Route::get("/carInfo/version/{CarModel:name}",[CarInfoController::class,'showVersion'])->name('carInfo.showVersion');
 Route::middleware('auth')->group(function (){
     Route::resource('Offer', CarOfferController::class);
     /**admin actions**/

@@ -28,6 +28,8 @@ class UpdateOfferRequest extends FormRequest
             'price'=>'required|float|max:10',
             'description'=>'required|string|max:300',
             'localization'=>'required|string',
+            'phone'=>'required|string|max:9|min:9',
+            'email'=>'required|string|email',
             'images'=>'nullable|image',
         ];
     }

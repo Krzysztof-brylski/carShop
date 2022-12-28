@@ -10,29 +10,35 @@ class CarOfferService{
      * @param array $data
      */
     public function store(array $data){
-
         //todo saving images to storage
+
         $savedImages=array();
         foreach ($data['images'] as $image){
             array_push($savedImages,Storage::put('OfferImages',$image));
         }
-        $offer = Offer::create([
-            'author'=>Auth::user()->id,
+        Offer::create([
             'status'=>'inactive',
             'type'=>'standard',
-
-
+            'author'=>array(
+               "id"=>Auth::user()->id,
+                "email"=>$data['email'],
+                "number"=>$data['phone'],
+            ),
+            'details'=>array(
+                "engineSize"=>$data['engineSize'],
+                "enginePower"=>$data['carPower'],
+                "engineType"=>$data['engineType'],
+            ),
+            'carInfo'=>array(
+                "manufacturer"=>$data['manufacturer'],
+                "model"=>$data['model'],
+                "version"=>$data['version'],
+            ),
             'price'=>$data['price'],
-            'manufacturer'=>$data['manufacturer'],
-            'model'=>$data['model'],
-            'version'=>$data['version'],
             'description'=>$data['description'],
-            'equipment'=>$data['equipment'],
             'localization'=>$data['localization'],
-            'repairs'=> (!isset($data['repairs'])?null: $data['repairs']),
             'images'=>$savedImages,
         ]);
-        $offer->save();
     }
 
     /**

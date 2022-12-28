@@ -52,10 +52,10 @@ class CarOfferController extends Controller
         $data=$request->validated();
         try{
             (new CarOfferService)->store($data);
-        }catch (OfferException $exception){
-            return Response()->json("error",500);
+        }catch (\Exception $exception){
+            return Response()->json($exception->getMessage(),500);
         }finally{
-            return back();
+            return Response()->json("xdddddddd",201);
         }
     }
 

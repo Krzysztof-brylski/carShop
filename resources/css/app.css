@@ -1,0 +1,25 @@
+.modal-overlay{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    overflow-x: hidden;
+    overflow-y: hidden;
+    z-index: 9;
+}
+.content{
+    height: 70%;
+    border-radius: 15px!important;
+    background-color: white;
+    z-index: 22;
+}
+.img-preview{
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    transform: none;
+    border-radius: 15px;
+}

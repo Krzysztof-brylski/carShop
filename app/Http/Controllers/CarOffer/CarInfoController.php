@@ -2,11 +2,14 @@
 namespace App\Http\Controllers\CarOffer;
 
 use App\Dto\CarInfo\CarModelsDTO;
+use App\Dto\CarInfo\CarVersionsDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateCarManufacturer;
 use App\Http\Requests\CreateCarModel;
 use App\Http\Requests\CreateCarVersion;
 use App\Models\CarManufacturer;
+use App\Models\CarModel;
+use App\Models\CarVersion;
 use App\Services\CarInfo\CarInfoService;
 use Illuminate\Http\JsonResponse;
 
@@ -20,18 +23,47 @@ class CarInfoController extends Controller
      * @return JsonResponse
      */
     public function index(){
-        return Response()->json(CarManufacturer::get(["name"])->toArray(),200);
+        try{
+            $result=CarManufacturer::get(["name"])->toArray();
+        }catch (\Exception $exception){
+            return Response()->json("BadRequest",400);
+        }finally{
+            return Response()->json($result,200);
+        }
+
+    }
+
+    /**
+ * Display the specified resource.
+ * @param CarManufacturer $CarManufacturer
+ * @return JsonResponse
+ */
+    public function show(CarManufacturer $CarManufacturer){
+        try{
+            $result=(new CarModelsDTO($CarManufacturer->Model))->CarModels;
+        }catch (\Exception $exception){
+            return Response()->json("BadRequest",400);
+        }finally{
+            return Response()->json($result,200);
+        }
+
     }
 
     /**
      * Display the specified resource.
-     * @param CarManufacturer $CarManufacturer
-     * @return JsonResponse
+     * @param CarModel $CarModel
+     * @return void
      */
-    public function show(CarManufacturer $CarManufacturer){
-        return Response()->json((new CarModelsDTO($CarManufacturer->Model))->CarModels,200);
-    }
+    public function showVersion(CarModel $CarModel){
+        try{
+            $result=(new CarVersionsDTO($CarModel->Version))->CarVersions;
+        }catch (\Exception $exception){
+            return Response()->json("BadRequest",400);
+        }finally{
+            return Response()->json($result,200);
+        }
 
+    }
     /**
      * Store a newly created resource in storage.
      * Register new car manufacturer
