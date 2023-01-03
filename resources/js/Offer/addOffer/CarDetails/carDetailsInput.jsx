@@ -6,14 +6,17 @@ export function CarDetailsInput({setCarDetails}) {
     const [enginePower,setEnginePower]=useState(null);
     const [transmission,setTransmission]=useState(null);
     const [fuel,setFuel]=useState(null);
-
+    const [productionYear,setProductionYear]=useState(null);
+    const [mileage,setMileage]=useState(null);
     useEffect(()=>{
         if(engineSize !== null && enginePower !== null && transmission !== null && fuel !== null){
             setCarDetails({
                 "engineSize":engineSize,
                 "enginePower":enginePower,
                 "transmission":transmission,
-                "fuel":fuel
+                "fuel":fuel,
+                "productionYear":productionYear,
+                "mileage":mileage,
             });
         }
 
@@ -29,9 +32,16 @@ export function CarDetailsInput({setCarDetails}) {
     const handleTransmission=(event)=>{
         setTransmission(event.target.value);
     };
+    const handleProductionYear=(event)=>{
+        setProductionYear(event.target.value);
+    };
+    const handleMileage=(event)=>{
+        setMileage(event.target.value);
+    };
     const handleFuel=(event)=>{
         setFuel(event.target.value);
     };
+
     return(
         <div className="row">
             <div className="col-xl-6 my-2">
@@ -46,7 +56,7 @@ export function CarDetailsInput({setCarDetails}) {
 
             <div className="col-xl-6">
                 <span>Rodzaj paliwa</span>
-                <select onChange={handleTransmission}>
+                <select onChange={handleFuel}>
                     <option selected>--Wybierz Rodzaj Paliwa--</option>
                     <option value="Benzyna" >Benzyna</option>
                     <option value="Diesel">Diesel</option>
@@ -57,15 +67,22 @@ export function CarDetailsInput({setCarDetails}) {
 
             <div className="col-xl-6">
                 <span>Skrzynia biegów</span>
-                <select onChange={handleFuel}>
+                <select onChange={handleTransmission}>
                     <option selected>--Wybierz Skrzynie Biegów--</option>
                     <option value="Automatyczna" >Automatyczna</option>
                     <option value="Manualna" >Manualna</option>
                 </select>
             </div>
 
+            <div className="col-xl-6">
+                <span>Rok produkcji</span>
+                <input onChange={handleProductionYear}  type="number" />
+            </div>
 
-
+            <div className="col-xl-6">
+                <span>Przebieg</span>
+                <input onChange={handleMileage} type="number" />
+            </div>
 
         </div>
     )

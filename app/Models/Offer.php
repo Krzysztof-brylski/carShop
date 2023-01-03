@@ -22,7 +22,10 @@ class Offer extends Model
     public function getAuthor(){
         return User::find($this->author['id']);
     }
-
+    public function confirm(){
+        $this->status="confirmed";
+        $this->save();
+    }
 
     use HasFactory;
 }

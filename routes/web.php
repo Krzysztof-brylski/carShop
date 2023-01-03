@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\CarOffer\CarEquipmentController;
 use App\Http\Controllers\CarOffer\CarInfoController;
 use App\Http\Controllers\CarOffer\CarOfferController;
 
 
+use App\Models\Admin\OfferConfirmation;
 use App\Models\CarManufacturer;
 use Illuminate\Support\Facades\Route;
 
@@ -34,7 +36,10 @@ Route::middleware('auth')->group(function (){
     Route::resource('Offer', CarOfferController::class);
     /**admin actions**/
     Route::middleware('user.admin')->group(function (){
-
+        Route::get("/admin",[AdminController::class,'index'])->name("admin.index");
+        Route::get("/admin/usersList/{OfferConfirmation}",[AdminController::class,'userList'])->name("admin.userList");
+        Route::get("/admin/adminList",[AdminController::class,'adminList'])->name("admin.adminList");
+        Route::get("/admin/baned/usersList",[AdminController::class,'banedUserList'])->name("admin.banedUserList");
     });
     /**extended user actions**/
     Route::middleware('user.extended')->group(function (){

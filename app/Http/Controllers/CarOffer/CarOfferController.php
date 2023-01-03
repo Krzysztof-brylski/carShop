@@ -6,8 +6,10 @@ use App\Exceptions\OfferException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Offer\CreateOfferRequest;
 use App\Http\Requests\Offer\UpdateOfferRequest;
+use App\Http\Requests\Search\SerachRequest;
 use App\Models\Offer;
 use App\Services\CarOffer\CarOfferService;
+use App\Services\Searching\SearchingService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
@@ -33,6 +35,18 @@ class CarOfferController extends Controller
     }
 
     /**
+     * Display a listing of the resources matching filters.
+     *
+     * @param SerachRequest $request
+     * @return Response
+     */
+    public function searchOffer(SerachRequest $request){
+        $data=$request->validated();
+        $query=(new SearchingService())->applyFilters($data);
+        return response()->json($query->paginate($data['paginate']),200);
+    }
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return View
@@ -55,7 +69,7 @@ class CarOfferController extends Controller
         }catch (\Exception $exception){
             return Response()->json($exception->getMessage(),500);
         }finally{
-            return Response()->json("xdddddddd",201);
+            return Response()->json("ok",201);
         }
     }
 
@@ -96,7 +110,6 @@ class CarOfferController extends Controller
      */
     public function update(UpdateOfferRequest $request, Offer $Offer){
         //todo custom exception
-        //todo request validation
         $data=$request->validated();
         try{
             (new CarOfferService())->update($Offer,$data);

@@ -14,8 +14,13 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <script>
         const crsfToken="{{csrf_token()}}";
+        const logoutGateWay="{{route('logout')}}";
+        const ManufacturerGateWay="{{url("carInfo/manufacturer/")}}";
+        const ModelGateWay="{{url("carInfo/model/")}}";
+        const VersionGateWay="{{url("carInfo/version/")}}";
+        const CreateOfferGateWay="{{route("Offer.store")}}";
+        const CarEquipmentGateWay="{{url("carEquipment/")}}";
     </script>
-
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -61,9 +66,11 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        Wyloguj
                                     </a>
-
+                                    <a class="dropdown-item" href="#">Moje ogłoszenia</a>
+                                    <a class="dropdown-item" href="#">Konto firmowe</a>
+                                    <a class="dropdown-item" href="#">Płatności</a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
@@ -75,7 +82,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main>
             @yield('content')
         </main>
     </div>

@@ -17,9 +17,10 @@ class AdminUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if(Auth::user()->account_role === "admin"){
+
+        if(Auth::user()->accountRole == "admin"){
             return $next($request);
         }
-        abort(403);
+        abort(404);
     }
 }

@@ -24,6 +24,8 @@ class CreateOfferRequest extends FormRequest
      */
     public function rules()
     {
+        $minDate=date("Y",strtotime('-80 year'));
+        $maxDate=date("Y");
         //todo make sure all selected equipment exist in db!
         return [
             'price'=>'required|max:10',
@@ -31,13 +33,15 @@ class CreateOfferRequest extends FormRequest
             'model'=>'required|string|exists:App\Models\CarModel,name|max:50',
             'version'=>'required|string|exists:App\Models\CarVersion,name|max:50',
             'description'=>'required|string|max:200',
-            'carPower'=>'integer|min:0',
-            'engineSize'=>'integer|min:0',
+            'carPower'=>'required|integer|min:0|max:2000',
+            'engineSize'=>'required|integer|min:0|max:20000',
+            'mileage'=>'required|min:0|max:10000000',
+            'productionYear'=>"required|integer|min:$minDate|max:$maxDate",
             'images'=>'required',
             'images.*'=>'file|image',
             //todo add custom rule for engine type and transmission
-            'engineType'=>'string',
-            'transmission'=>'string',
+            'engineType'=>'required|string',
+            'transmission'=>'required|string',
             //'equipment'=>'required',
             //'equipment.*'=>'exists:App\Models\CarEquipment, name|max:50',
             'phone'=>'required|string|max:9|min:9',

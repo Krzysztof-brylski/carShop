@@ -1,3 +1,6 @@
+body{
+    overflow-x: hidden;
+}
 .modal-overlay{
     position: absolute;
     width: 100%;

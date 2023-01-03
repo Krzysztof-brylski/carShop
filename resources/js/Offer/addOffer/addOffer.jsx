@@ -36,6 +36,8 @@ function AddOffer() {
         formData.append("engineSize",carDetails.engineSize);
         formData.append("engineType",carDetails.fuel);
         formData.append("transmission",carDetails.transmission);
+        formData.append("productionYear",carDetails.productionYear);
+        formData.append("mileage",carDetails.mileage);
         formData.append("phone",offerContact.phone);
         formData.append("email",offerContact.email);
         formData.append("equipment",carEquipment);
