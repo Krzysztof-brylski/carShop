@@ -1,12 +1,29 @@
 import React,{useState,useEffect} from 'react';
+import Table from "../Assets/table";
 
 export function ReportsConfirmation({currentIndex,index}) {
     if( currentIndex != index)return null;
 
+
+    const namesTranslations={
+        "id":"ID Zgłoszenia",
+        "user_id": "ID Użytkownika",
+        "confirm":{
+            "name":"Zatwierdz",
+            "style":"btn btn-success"
+        },
+        "show":{
+            "name":"Zobacz",
+            "style":"btn btn-warning"
+        },
+        "reject":{
+            "name":"Odrzuć",
+            "style":"btn btn-danger"
+        },
+    };
+
     return (
-        <div>
-            <h1>ReportsConfirmation</h1>
-        </div>
+        <Table dataSource={reportsConfirmationGateWay} namesTranslations={namesTranslations}/>
     )
 }
 

@@ -2,31 +2,31 @@
 
 namespace App\Models\Admin;
 
-
-
-use App\Models\Offer;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class OfferConfirmation extends Model
+class ReportConfirmation extends Model
 {
     use HasFactory;
-    protected $table="offer_confirmation";
-
+    protected $table="report_confirmation";
     protected $fillable=[
-      'offer_id'
+        'user_id',
+        'content'
     ];
-    public function getOffer(){
-        return Offer::find(['id'=>$this->offer_id])->first();
+    public function getUser(){
+        return User::find(['id'=>$this->user_id])->first();
     }
     public function confirm(){
         DB::transaction(function (){
-            Offer::find($this->offer_id)->confirm();
+            User::find($this->user_id)->ban();
             $this->delete();
         });
     }
     public function reject(){
         //todo send message to author about reject
     }
+
+
 }

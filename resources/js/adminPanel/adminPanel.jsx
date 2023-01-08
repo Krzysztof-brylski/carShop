@@ -168,7 +168,7 @@ function AdminPanel(){
 
 
             </div>
-            <div className="col-xl-10" style={{backgroundColor:"#f0f0f0"}}>
+            <div className="col-xl-10 p-5" style={{backgroundColor:"#f0f0f0"}}>
                 <DashBoard currentIndex={currentIndex} index={0}/>
                 <UserList currentIndex={currentIndex} index={1} />
                 <UserBanedList currentIndex={currentIndex} index={2} />

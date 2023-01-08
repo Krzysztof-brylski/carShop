@@ -46,4 +46,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isBaned(){
+        return $this->accountType =="baned";
+    }
+    public function ban(){
+        $this->accountType = "baned";
+        $this->save();
+    }
+    public function unBan(){
+        $this->accountType = "standard";
+        $this->save();
+    }
+    public function isAdmin(){
+        return $this->accountRole == "admin";
+    }
+    public function confirm(){
+        //todo change acc type confirmation
+    }
 }

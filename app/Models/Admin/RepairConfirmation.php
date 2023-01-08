@@ -2,20 +2,17 @@
 
 namespace App\Models\Admin;
 
-
-
 use App\Models\Offer;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class OfferConfirmation extends Model
+class RepairConfirmation extends Model
 {
     use HasFactory;
-    protected $table="offer_confirmation";
-
+    protected $table="repair_confirmation";
     protected $fillable=[
-      'offer_id'
+        'offer_id'
     ];
     public function getOffer(){
         return Offer::find(['id'=>$this->offer_id])->first();
@@ -29,4 +26,5 @@ class OfferConfirmation extends Model
     public function reject(){
         //todo send message to author about reject
     }
+
 }

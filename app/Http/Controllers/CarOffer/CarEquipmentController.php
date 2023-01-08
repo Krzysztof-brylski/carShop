@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\CarOffer;
 
+use App\Dto\Admin\AdminPanelTableDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CarEquipment\CreateCarEquipment;
+use App\Models\CarEquipment;
 use App\Services\CarEquipment\CarEquipmentService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,16 +14,20 @@ class CarEquipmentController extends Controller
 {
     /**
      * Display a listing of the resource.
-     * @param CarEquipmentService $carEquipmentService
      * @return JsonResponse
      */
     public function index(){
+        $result=(new AdminPanelTableDTO(  CarEquipment::paginate(9,['id','name']),
+            get_class_methods(CarEquipmentService::class)))->data;
+        return Response()->json($result,200);
+    }
+    public function delete(CarEquipment $CarEquipment){
         try{
-            $result=(new CarEquipmentService())->index();
-        }catch(\Exception $exception){
-            return Response()->json(["error"=>$exception->getMessage()],422);
+            (new CarEquipmentService())->delete($CarEquipment);
+        }catch (\Exception $exception){
+            return Response()->json($exception->getMessage(),500);
         }finally{
-            return Response()->json($result,200);
+            return Response()->json("ok",200);
         }
     }
 
@@ -30,14 +36,14 @@ class CarEquipmentController extends Controller
      * @param CreateCarEquipment $request
      * @return JsonResponse
      */
-    public function store(CreateCarEquipment $request){
-        $data=$request->validated();
-        Try{
-            (new CarEquipmentService())->store($data);
-        }catch(\Exception $exception){
-            return Response()->json(["error"=>$exception->getMessage()],422);
-        }finally{
-            return Response()->json("ok",201);
-        }
+    public function store(CreateCarEquipmentRequest $request){
+//        $data=$request->validated();
+//        Try{
+//            (new CarEquipmentService())->store($data);
+//        }catch(\Exception $exception){
+//            return Response()->json(["error"=>$exception->getMessage()],422);
+//        }finally{
+//            return Response()->json("ok",201);
+//        }
     }
 }

@@ -8,8 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class CarEquipment extends Model
 {
     protected $connection='mysql';
+    protected $table="car_equipment";
     protected $fillable=[
-        'id',
         'name'
     ];
 
