@@ -2,16 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 use App\Dto\Admin\AdminPanelTableDTO;
-use App\Dto\Admin\DashBoardDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateAdminRequest;
-use App\Models\Admin\OfferConfirmation;
-
+use App\Http\Requests\Admin\CreateAdminRequest;
 use App\Models\User;
 use App\Services\Admin\AdminService;
 use App\Services\Admin\AdminUsersService;
 use App\Services\Admin\UsersListService;
-
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
 
@@ -27,7 +23,6 @@ class AdminController extends Controller
     }
 
     /**
-     * @param OfferConfirmation $OfferConfirmation
      * @return void
      */
     public function userList(){
@@ -55,14 +50,13 @@ class AdminController extends Controller
 
     }
     public function deleteUser(User $User){
-        (new UsersListService())->deleteUser($User);
-//        try{
-//            (new UsersListService())->deleteUser($User);
-//        }catch (\Exception $exception){
-//            return Response()->json($exception->getMessage(),'500');
-//        }finally{
-//            return Response()->json("OK",'200');
-//        }
+        try{
+            (new UsersListService())->deleteUser($User);
+        }catch (\Exception $exception){
+            return Response()->json($exception->getMessage(),'500');
+        }finally{
+            return Response()->json("OK",'200');
+        }
     }
     /**
      * @return JsonResponse
@@ -117,7 +111,6 @@ class AdminController extends Controller
      * @return JsonResponse
      */
     public function createAdmin(CreateAdminRequest $request){
-        //todo generate email with password creating
         $data=$request->validated();
         try{
             (new AdminService())->createAdmin($data);
@@ -138,12 +131,5 @@ class AdminController extends Controller
         }
     }
 
-
-
-    // users list -> admin
-    // payment, ?mailing config
-    // offers admin -> reports,
-    // creating admins
-    // confirmations -> offers, carInfo, offers-repairs
 
 }

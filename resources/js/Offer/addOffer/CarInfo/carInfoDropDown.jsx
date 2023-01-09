@@ -13,15 +13,17 @@ import axios from "axios";
 export function CarInfoDropDown({dataSource,data,role,setData}) {
         const[responseData,setResponseData]=useState([]);
         useEffect(()=>{
-            axios.get(dataSource+"/"+data).then((response)=>{
-                let result=Object.values(response.data);
-                setResponseData(result);
-            });
+            if(data !== null){
+                axios.get(dataSource+"/"+data).then((response)=>{
+                    let result=Object.values(response.data);
+                    setResponseData(result);
+                });
+            }
         },[data]);
         if(data === null){
             return(
                 <>
-                    <select name={role} id={role}>
+                    <select name={role} id={role} disabled style={{cursor:"not-allowed"}}>
                         <option value={null} selected>--wybierz {role}--</option>
                     </select>
                 </>
@@ -30,14 +32,16 @@ export function CarInfoDropDown({dataSource,data,role,setData}) {
 
 
         const handleSelect=(event)=>{
-            setData(event.target.value);
+            let value=event.target.value;
+            value === "null" ? setData(null) : setData(value);
+
         };
 
         return(
 
             <>
                 <select name={role} id={role} onChange={handleSelect} >
-                    <option value={null} selected>--wybierz {role}--</option>
+                    <option value={"null"} selected>--wybierz {role}--</option>
                     {
                         responseData.length !== 0 && responseData.map((element) => {
                             return (<option value={element.name}>{element.name}</option>);

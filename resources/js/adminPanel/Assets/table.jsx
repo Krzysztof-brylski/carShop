@@ -1,5 +1,7 @@
 import React,{useEffect,useState} from 'react';
 import axios from "axios";
+import EmptyResult from "../../helpers/noResults";
+import LoadingScreen from "../../helpers/loading";
 export function Table({dataSource,namesTranslations}) {
 
     const[dataUrl,setDataUrl]=useState(dataSource);
@@ -7,26 +9,30 @@ export function Table({dataSource,namesTranslations}) {
     const[actions,setActions]=useState([]);
     const[control,setControl]=useState([]);
     const[loading,setLoading]=useState(true);
-
+    const[emptyResult,setEmptyResult]=useState(false);
     useEffect(()=>{
+        setLoading(true);
         axios.get(dataUrl,{}).then((res)=>{
-
-            setData(res.data.paginator.data);
-            setControl(res.data.paginator.links);
-            setActions(res.data.actions)
+            if(res.data.paginator.data.length !== 0){
+                setData(res.data.paginator.data);
+                setControl(res.data.paginator.links);
+                setActions(res.data.actions)
+            }else{
+                setEmptyResult(true)
+            }
         });
 
         setLoading(false);
     },[dataUrl]);
-    console.log(data);
+
     const handleActionBtn=(objectID,actionType)=>{
         let url=dataSource+"/"+actionType+"/"+objectID;
-        console.log(objectID,actionType);
         let method="POST";
         if(actionType==="show"){
             method="GET";
         }
         axios.request({"method":method,"url":url}).then((res)=>{
+            //todo confirmation then success or error info
             console.log(res);
         })
 
@@ -55,8 +61,12 @@ export function Table({dataSource,namesTranslations}) {
     return(
         <div>
             {
+                emptyResult &&
+                    <EmptyResult/>
+            }
+            {
 
-                data.length !== 0 &&
+                data.length !== 0 && !emptyResult &&
                 <>
 
                     <div className="d-flex justify-content-center">
@@ -108,6 +118,7 @@ export function Table({dataSource,namesTranslations}) {
                     </div>
                 </>
             }
+
         </div>
     )
 }

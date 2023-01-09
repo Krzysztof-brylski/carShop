@@ -1,11 +1,14 @@
 <?php
 
-namespace App\Http\Requests;
-
+namespace App\Http\Requests\Admin;
+use App\Http\Requests\jsonValidationErrorResponse;
 use Illuminate\Foundation\Http\FormRequest;
+
 
 class CreateAdminRequest extends FormRequest
 {
+    use jsonValidationErrorResponse;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +16,7 @@ class CreateAdminRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +27,9 @@ class CreateAdminRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'=>"required|string|max:50",
+            'email'=>"required|email|confirmed|unique:App\Models\User,email"
         ];
     }
+
 }

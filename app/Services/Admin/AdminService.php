@@ -2,13 +2,15 @@
 namespace App\Services\Admin;
 
 use App\Dto\Admin\DashBoardDTO;
+use App\Events\AdminCreateEvent;
 use App\Models\Admin\OfferConfirmation;
 use App\Models\Offer;
 use App\Models\User;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
 
 class AdminService{
-
+    use ResetsPasswords;
 
 
     public function dashBoard(){
@@ -23,17 +25,18 @@ class AdminService{
     }
     public function createAdmin($data){
         //todo send verification email
-        $admin=User::create([
+        $admin=User::firstOrcreate([
             'name' => $data['name'],
             'email' => $data['email'],
             'offersCredit'=>0,
-            'accountType' =>'admin',
-            'accountRole' =>'standard',
+            'accountType' =>'standard',
+            'accountRole' =>'admin',
             'password' => Hash::make(date("h-i-s, j-m-y, it is w Day")),
         ]);
         if(!$admin){
             throw new \Exception('error');
         }
+        event( new AdminCreateEvent($admin));
 
     }
     public function deleteAdmin(User $User){

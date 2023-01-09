@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function (){
         /** admin user management **/
         Route::get("/admin/adminList",[AdminController::class,'adminList'])->name("admin.adminList");
         Route::post("/admin/adminList/deleteAdmin/{User}",[AdminController::class,'deleteAdmin'])->name("admin.deleteAdmin");
-
+        Route::post("/admin/makeAdmin/",[AdminController::class,'createAdmin'])->name("admin.createAdmin");
         /**offer confirmation**/
         Route::get("/admin/offerConfirmation/",[OfferConfirmationController::class,'index'])->name("admin.offerConfirmation.index");
         Route::get("/admin/offerConfirmation/show/{OfferConfirmation}",[OfferConfirmationController::class,'show'])->name("admin.offerConfirmation.show");
