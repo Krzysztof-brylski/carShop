@@ -14,6 +14,9 @@ class RepairConfirmation extends Model
     protected $fillable=[
         'offer_id'
     ];
+    public function getUser(){
+        return $this->getOffer()->getAuthor();
+    }
     public function getOffer(){
         return Offer::find(['id'=>$this->offer_id])->first();
     }

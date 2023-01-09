@@ -15,7 +15,7 @@ class ExtendedUserConfirmation extends Model
     protected $fillable=[
         'user_id'
     ];
-    public function getOffer(){
+    public function getUser(){
         return User::find(['id'=>$this->user_id])->first();
     }
     public function confirm(){

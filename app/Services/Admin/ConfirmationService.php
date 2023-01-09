@@ -2,6 +2,8 @@
 
 namespace App\Services\Admin;
 
+use App\Events\ConfirmationEvent;
+
 class  ConfirmationService{
 
     /**
@@ -10,7 +12,8 @@ class  ConfirmationService{
      */
     public function confirm($model){
         if($model){
-            $model->confirm();
+           // $model->confirm();
+            event( new ConfirmationEvent($model,true));
         }
     }
     /**
@@ -27,7 +30,8 @@ class  ConfirmationService{
      */
     public function reject($model){
         if($model){
-            $model->reject();
+            //$model->reject();
+            event( new ConfirmationEvent($model,false));
         }
     }
 

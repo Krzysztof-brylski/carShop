@@ -18,9 +18,8 @@ class Offer extends Model
         'localization',
         'images'
     ];
-
     public function getAuthor(){
-        return User::find($this->author['id']);
+        return User::find($this->author['id'])->first();
     }
     public function confirm(){
         $this->status="confirmed";

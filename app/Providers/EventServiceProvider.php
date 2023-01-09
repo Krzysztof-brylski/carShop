@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Events\AdminCreateEvent;
+use App\Events\ConfirmationEvent;
 use App\Listeners\AdminCreateListener;
+use App\Listeners\ConfirmationListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -23,6 +25,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         AdminCreateEvent::class=>[
             AdminCreateListener::class,
+        ],
+        ConfirmationEvent::class=>[
+          ConfirmationListener::class,
         ],
     ];
 
