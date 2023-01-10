@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class RepairConfirmationNotification extends Notification
+class RepairConfirmationNotification extends Notification implements ShouldQueue
 {
     public $offer;
     public $confirmed;
