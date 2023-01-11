@@ -27,8 +27,8 @@ export function CarInfoInput({setCarInfo}) {
     },[manufacturer]);
     return(
         <div className="d-flex flex-row w-50">
-            <CarInfoDropDown dataSource={ManufacturerGateWay} data={" "} role={"manufacturer"} setData={setManufacturer}/>
-            <CarInfoDropDown dataSource={ModelGateWay} data={manufacturer} role={"model"} setData={setModel}/>
+            <CarInfoDropDown dataSource={ManufacturerGateWay} data={" "} role={"manufacturer"} setData={setManufacturer} setNextField={setModel}/>
+            <CarInfoDropDown dataSource={ModelGateWay} data={manufacturer} role={"model"} setData={setModel } setNextField={setVersion}/>
             <CarInfoDropDown dataSource={VersionGateWay} data={model} role={"version"} setData={setVersion}/>
         </div>
     );

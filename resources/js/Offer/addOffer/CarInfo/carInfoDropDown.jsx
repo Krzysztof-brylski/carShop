@@ -18,9 +18,11 @@ export function CarInfoDropDown({dataSource,data,role,setData}) {
                     let result=Object.values(response.data);
                     setResponseData(result);
                 });
+                document.querySelector(`#${role}`).value="null";
             }
         },[data]);
         if(data === null){
+            console.log('xd');
             return(
                 <>
                     <select name={role} id={role} disabled style={{cursor:"not-allowed"}}>
@@ -40,8 +42,8 @@ export function CarInfoDropDown({dataSource,data,role,setData}) {
         return(
 
             <>
-                <select name={role} id={role} onChange={handleSelect} >
-                    <option value={"null"} selected>--wybierz {role}--</option>
+                <select name={role} id={role} onChange={handleSelect} defaultValue={"null"} >
+                    <option value={"null"} selected={true}>--wybierz {role}--</option>
                     {
                         responseData.length !== 0 && responseData.map((element) => {
                             return (<option value={element.name}>{element.name}</option>);

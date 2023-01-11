@@ -11,17 +11,6 @@ export function CarInfoConfig({currentIndex,index}) {
     const [version,setVersion]=useState(null);
     const[addResourceModal,setAddResourceModal]=useState({});
 
-    const xd=()=>{
-        console.log('xd');
-        return(
-            <AddCarInfoModal
-                display={true}
-
-            />
-        );
-    };
-
-
     return (
         <div>
 
@@ -32,7 +21,7 @@ export function CarInfoConfig({currentIndex,index}) {
                 <div className="col-xl-4">
                     <h5>Producent Samochodu:</h5>
                     <CarInfoDropDown dataSource={ManufacturerGateWay} data={" "} role={"manufacturer"} setData={setManufacturer}/>
-                    <button className="btn btn-success p-1 mx-3"><FontAwesomeIcon icon={faPlus} size={"lg"} onClick={xd}/></button>
+                    <button className="btn btn-success p-1 mx-3"><FontAwesomeIcon icon={faPlus} size={"lg"}/></button>
                 </div>
                 <div className="col-xl-4">
                     <h5>Model Samochodu:</h5>

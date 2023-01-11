@@ -18,11 +18,11 @@ export function OfferSearching() {
             <h3>Powiedz nam jakiego auta szukasz</h3>
             <div className="col-xl-6">
                 <span>Marka samochodu</span>
-                <CarInfoDropDown dataSource={ManufacturerGateWay} data={" "} role={"manufacturer"} setData={setManufacturer}/>
+                <CarInfoDropDown dataSource={ManufacturerGateWay} data={" "} role={"manufacturer"} setData={setManufacturer} setNextField={setModel} />
             </div>
             <div className="col-xl-6">
                 <span>Model samochodu</span>
-                <CarInfoDropDown dataSource={ModelGateWay} data={manufacturer} role={"model"} setData={setModel}/>
+                <CarInfoDropDown dataSource={ModelGateWay} data={manufacturer} role={"model"} setData={setModel} setNextField={setVersion}/>
             </div>
             <div className="col-xl-6">
                 <span>Wersja samochodu</span>

@@ -112,7 +112,7 @@ export function Table({dataSource,namesTranslations}) {
                             return ( <span
                                 style={paginatorStyle}
                                 onClick={()=>changePage(element.url)}
-                                dangerouslySetInnerHTML={{ __html: element.label }}>
+                                >{element.label}
                                 </span>);
                         })}
                     </div>

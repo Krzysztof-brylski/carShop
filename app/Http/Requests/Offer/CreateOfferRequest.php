@@ -2,6 +2,9 @@
 
 namespace App\Http\Requests\Offer;
 
+use App\Rules\engineTypeRule;
+use App\Rules\productionYearRule;
+use App\Rules\transmissionTypeRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -24,9 +27,8 @@ class CreateOfferRequest extends FormRequest
      */
     public function rules()
     {
-        $minDate=date("Y",strtotime('-80 year'));
-        $maxDate=date("Y");
-        //todo make sure all selected equipment exist in db!
+
+
         return [
             'price'=>'required|max:10',
             'manufacturer'=>'required|string|exists:App\Models\CarManufacturer,name|max:50',
@@ -36,14 +38,13 @@ class CreateOfferRequest extends FormRequest
             'carPower'=>'required|integer|min:0|max:2000',
             'engineSize'=>'required|integer|min:0|max:20000',
             'mileage'=>'required|min:0|max:10000000',
-            'productionYear'=>"required|integer|min:$minDate|max:$maxDate",
+            'productionYear'=>["required","integer", new productionYearRule()],
             'images'=>'required',
             'images.*'=>'file|image',
-            //todo add custom rule for engine type and transmission
-            'engineType'=>'required|string',
-            'transmission'=>'required|string',
-            //'equipment'=>'required',
-            //'equipment.*'=>'exists:App\Models\CarEquipment, name|max:50',
+            'engineType'=>['required','string', new engineTypeRule()],
+            'transmission'=>['required','string', new transmissionTypeRule()],
+            'equipment'=>'required',
+            'equipment.*'=>'exists:App\Models\CarEquipment, name|max:50',
             'phone'=>'required|string|max:9|min:9',
             'email'=>'required|string|email',
             'localization'=>'required|string',

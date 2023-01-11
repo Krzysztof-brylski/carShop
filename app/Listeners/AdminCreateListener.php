@@ -18,7 +18,9 @@ class AdminCreateListener
      */
     public function handle(AdminCreateEvent $event)
     {
+
         if ($event->user->isAdmin()) {
+            dd($event);
             $event->user->notify(new AdminCreateNotification($event->user));
         }
     }

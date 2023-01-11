@@ -25,7 +25,7 @@ class AdminService{
     }
     public function createAdmin($data){
         //todo send verification email
-        $admin=User::firstOrcreate([
+        $admin=User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'offersCredit'=>0,

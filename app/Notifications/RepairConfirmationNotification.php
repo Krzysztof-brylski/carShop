@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notification;
 
 class RepairConfirmationNotification extends Notification implements ShouldQueue
 {
+    use Queueable;
     public $offer;
     public $confirmed;
 
