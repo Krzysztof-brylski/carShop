@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CarOffer;
 
 use App\Dto\Admin\AdminPanelTableDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CarEquipment\CreateCarEquipment;
+use App\Http\Requests\CarEquipment\CreateCarEquipmentRequest;
 use App\Models\CarEquipment;
 use App\Services\CarEquipment\CarEquipmentService;
 use Illuminate\Http\JsonResponse;
@@ -33,17 +33,12 @@ class CarEquipmentController extends Controller
 
     /**
      * Store a newly created resource in storage.
-     * @param CreateCarEquipment $request
+     * @param CreateCarEquipmentRequest $request
      * @return JsonResponse
      */
     public function store(CreateCarEquipmentRequest $request){
-//        $data=$request->validated();
-//        Try{
-//            (new CarEquipmentService())->store($data);
-//        }catch(\Exception $exception){
-//            return Response()->json(["error"=>$exception->getMessage()],422);
-//        }finally{
-//            return Response()->json("ok",201);
-//        }
+        $data=$request->validated();
+        (new CarEquipmentService())->store($data);
+        return Response()->json("ok",201);
     }
 }

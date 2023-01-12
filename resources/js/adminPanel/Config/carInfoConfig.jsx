@@ -9,7 +9,27 @@ export function CarInfoConfig({currentIndex,index}) {
     const [manufacturer,setManufacturer]=useState(null);
     const [model,setModel]=useState(null);
     const [version,setVersion]=useState(null);
-    const[addResourceModal,setAddResourceModal]=useState({});
+    const[display,setDisplay]=useState(false);
+    const [carInfoData,setCarInfoData]=useState({});
+    const [allCarInfoData,setAllCarInfoData]=useState({});
+    useEffect(()=>{
+        setCarInfoData({
+            "manufacturer":manufacturer,
+            "model":model,
+            "version":version,
+        });
+    },[manufacturer,model,version]);
+
+    useEffect(()=>{
+        axios.get("http://127.0.0.1:8000/carInfo",{params:setCarInfoData}).then((res)=>{
+            console.log(res);
+        });
+    });
+
+    const showModal=()=>{
+        setDisplay(!display);
+    };
+
 
     return (
         <div>
@@ -21,22 +41,26 @@ export function CarInfoConfig({currentIndex,index}) {
                 <div className="col-xl-4">
                     <h5>Producent Samochodu:</h5>
                     <CarInfoDropDown dataSource={ManufacturerGateWay} data={" "} role={"manufacturer"} setData={setManufacturer}/>
-                    <button className="btn btn-success p-1 mx-3"><FontAwesomeIcon icon={faPlus} size={"lg"}/></button>
+                    <button className="btn btn-success p-1 mx-3" disabled={manufacturer !== null} onClick={showModal}>
+                        <FontAwesomeIcon icon={faPlus} size={"lg"} />
+                    </button>
                 </div>
                 <div className="col-xl-4">
                     <h5>Model Samochodu:</h5>
                     <CarInfoDropDown dataSource={ModelGateWay} data={manufacturer} role={"model"} setData={setModel}/>
-                    <button className="btn btn-success p-1 mx-3"  disabled={manufacturer===null}>
-                        <FontAwesomeIcon icon={faPlus} size={"lg"}/>
+                    <button className="btn btn-success p-1 mx-3"  disabled={manufacturer===null || model !== null} onClick={showModal}>
+                        <FontAwesomeIcon icon={faPlus} size={"lg"} />
                     </button>
                 </div>
                 <div className="col-xl-4">
                     <h5>Wersja Modelu Samochodu:</h5>
                     <CarInfoDropDown dataSource={VersionGateWay} data={model} role={"version"} setData={setVersion}/>
-                    <button className="btn btn-success p-1 mx-3" disabled={model===null}>
+                    <button className="btn btn-success p-1 mx-3" disabled={model===null || version !== null} onClick={showModal}>
                         <FontAwesomeIcon icon={faPlus} size={"lg"}/>
                     </button>
                 </div>
+                <AddCarInfoModal display={display} setDisplay={setDisplay} data={carInfoData}/>
+
             </div>
         </div>
     )

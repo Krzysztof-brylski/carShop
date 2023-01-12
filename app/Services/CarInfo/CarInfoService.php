@@ -20,7 +20,7 @@ class CarInfoService{
      * @return void
      */
     public function storeManufacturer(array $data){
-        $CarManufacturer = new CarManufacturer($data);
+        $CarManufacturer = new CarManufacturer(['name'=>$data['manufacturer']]);
         $CarManufacturer->save();
     }
     /**
@@ -32,7 +32,7 @@ class CarInfoService{
         $manufacturerName=$data['manufacturer'];
         $manufacturer = CarManufacturer::where("name","=",$manufacturerName)->first();
         $model=new CarModel();
-        $model->name=$data['name'];
+        $model->name=$data['model'];
         $manufacturer->Model()->save($model);
     }
 
@@ -45,7 +45,7 @@ class CarInfoService{
         $modelName=$data['model'];
         $model = CarModel::where("name","=",$modelName)->first();
         $version = new CarVersion();
-        $version->name=$data['name'];
+        $version->name=$data['version'];
         $model->Version()->save($version);
     }
 

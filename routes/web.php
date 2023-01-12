@@ -34,9 +34,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // cars info
-Route::get("/carInfo/manufacturer",[CarInfoController::class,'index'])->name('carInfo.index');
-Route::get("/carInfo/model/{CarManufacturer:name}",[CarInfoController::class,'show'])->name('carInfo.show');
-Route::get("/carInfo/version/{CarModel:name}",[CarInfoController::class,'showVersion'])->name('carInfo.showVersion');
+Route::get("/carInfo",[CarInfoController::class,'index'])->name('carInfo.index');
+Route::get("/carInfo/manufacturer",[CarInfoController::class,'showManufacturers'])->name('carInfo.showManufacturers');
+Route::get("/carInfo/model/{CarManufacturer:name}",[CarInfoController::class,'showModels'])->name('carInfo.showModels');
+Route::get("/carInfo/version/{CarModel:name}",[CarInfoController::class,'showVersions'])->name('carInfo.showVersions');
 Route::get("/carEquipment",[CarEquipmentController::class,'index'])->name("carEquipment.index");
 Route::middleware('auth')->group(function (){
     Route::resource('Offer', CarOfferController::class);
@@ -76,7 +77,7 @@ Route::middleware('auth')->group(function (){
         Route::post("/admin/repairsConfirmation/confirm/{RepairConfirmation}",[RepairsConfirmationController::class,'confirm'])->name("admin.repairsConfirmation.confirm");
         Route::post("/admin/repairsConfirmation/reject/{RepairConfirmation}",[RepairsConfirmationController::class,'reject'])->name("admin.repairsConfirmation.reject");
         /**carEquipment store**/
-        Route::post("/admin/carEquipment",[CarEquipmentController::class,'store'])->name("carEquipment.store");
+        Route::post("/admin/createCarEquipment",[CarEquipmentController::class,'store'])->name("carEquipment.store");
         Route::post("/carEquipment/delete/{CarEquipment}",[CarEquipmentController::class,'delete'])->name("carEquipment.delete");
         /**carInfo store and update**/
         Route::post("/admin/carInfo/storeManufacturer",[CarInfoController::class,'storeManufacturer'])->name("carInfo.storeManufacturer");

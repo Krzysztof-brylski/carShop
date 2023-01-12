@@ -4,13 +4,13 @@ namespace App\Http\Controllers\CarOffer;
 use App\Dto\CarInfo\CarModelsDTO;
 use App\Dto\CarInfo\CarVersionsDTO;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CreateCarManufacturer;
-use App\Http\Requests\CreateCarModel;
-use App\Http\Requests\CreateCarVersion;
+use App\Http\Requests\CarInfo\CreateCarManufacturerRequest;
+use App\Http\Requests\CarInfo\CreateCarModelRequest;
+use App\Http\Requests\CarInfo\CreateCarVersionRequest;
 use App\Models\CarManufacturer;
 use App\Models\CarModel;
-use App\Models\CarVersion;
 use App\Services\CarInfo\CarInfoService;
+use \Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 
 
@@ -23,22 +23,25 @@ class CarInfoController extends Controller
      * @return JsonResponse
      */
     public function index(){
-        try{
-            $result=CarManufacturer::get(["name"])->toArray();
-        }catch (\Exception $exception){
-            return Response()->json("BadRequest",400);
-        }finally{
-            return Response()->json($result,200);
-        }
-
+        $result = CarManufacturer::with(['Model','Model.Version'])->paginate(10);
+        return Response()->json($result,200);
     }
 
     /**
- * Display the specified resource.
- * @param CarManufacturer $CarManufacturer
- * @return JsonResponse
- */
-    public function show(CarManufacturer $CarManufacturer){
+     * Display list of manufacturers.
+     * @return JsonResponse
+     */
+    public function showManufacturers(){
+        $result = CarManufacturer::all(['id','name'])->toArray();
+        return Response()->json($result,200);
+    }
+
+     /**
+     * Display car model list fro  specified manufacturer.
+     * @param CarManufacturer $CarManufacturer
+     * @return JsonResponse
+     */
+    public function showModels(CarManufacturer $CarManufacturer){
         try{
             $result=(new CarModelsDTO($CarManufacturer->Model))->CarModels;
         }catch (\Exception $exception){
@@ -50,11 +53,11 @@ class CarInfoController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display car model version for specified car model
      * @param CarModel $CarModel
      * @return void
      */
-    public function showVersion(CarModel $CarModel){
+    public function showVersions(CarModel $CarModel){
         try{
             $result=(new CarVersionsDTO($CarModel->Version))->CarVersions;
         }catch (\Exception $exception){
@@ -67,51 +70,36 @@ class CarInfoController extends Controller
     /**
      * Store a newly created resource in storage.
      * Register new car manufacturer
-     * @param CreateCarManufacturer $request
+     * @param CreateCarManufacturerRequest $request
      * @return JsonResponse
      */
-    public function storeManufacturer(CreateCarManufacturer $request){
+    public function storeManufacturer(CreateCarManufacturerRequest $request){
         $data=$request->validated();
-        try{
-            (new CarInfoService())->storeManufacturer($data);
-        }catch (\Exception $exception){
-            return Response()->json(['error'=>$exception->getMessage()],422);
-        }finally{
-            return Response()->json("ok",201);
-        }
+        (new CarInfoService())->storeManufacturer($data);
+        return Response()->json("ok",201);
     }
 
     /**
      * Store a newly created resource in storage.
      * Register new car model
-     * @param CreateCarModel $request
+     * @param CreateCarModelRequest $request
      * @return JsonResponse
      */
-    public function storeModel(CreateCarModel $request){
+    public function storeModel(CreateCarModelRequest $request){
         $data=$request->validated();
-        try{
-            (new CarInfoService())->storeModel($data);
-        }catch (\Exception $exception){
-            return Response()->json(['error'=>$exception->getMessage()],422);
-        }finally{
-            return Response()->json("ok",201);
-        }
+        (new CarInfoService())->storeModel($data);
+        return Response()->json("ok",201);
     }
 
     /**
      * Store a newly created resource in storage.
      * Register new card model version
-     * @param CreateCarVersion $request
+     * @param CreateCarVersionRequest $request
      * @return JsonResponse
      */
-    public function storeVersion(CreateCarVersion $request){
+    public function storeVersion(CreateCarVersionRequest $request){
         $data=$request->validated();
-        try{
-            (new CarInfoService())->storeVersion($data);
-        }catch (\Exception $exception){
-            return Response()->json(['error'=>$exception->getMessage()],422);
-        }finally{
-            return Response()->json("ok",201);
-        }
+        (new CarInfoService())->storeVersion($data);
+        return Response()->json("ok",201);
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\CarInfo;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateCarManufacturer extends FormRequest
+class CreateCarVersionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class CreateCarManufacturer extends FormRequest
     public function rules()
     {
         return [
-            "name"=>"string|unique:App\Models\CarManufacturer,name|max:50"
+            "model"=>"string|exists:App\Models\CarModel,name|max:50",
+            "version"=>"string|unique:App\Models\CarVersion,name|max:50"
         ];
     }
 }

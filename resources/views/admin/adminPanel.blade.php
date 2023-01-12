@@ -11,18 +11,23 @@
     <script>
         const crsfToken="{{csrf_token()}}";
         const logoutGateWay="{{route('logout')}}";
-        const ManufacturerGateWay="{{url("carInfo/manufacturer/")}}";
+        const ManufacturerGateWay="{{url("carInfo/manufacturer")}}";
         const ModelGateWay="{{url("carInfo/model/")}}";
         const VersionGateWay="{{url("carInfo/version/")}}";
         const CreateOfferGateWay="{{route("Offer.store")}}";
         const CarEquipmentGateWay="{{url("carEquipment/")}}";
 
-        const accountConfirmationGateWay="{{url("http://127.0.0.1:8000/admin/extendedUserConfirmation")}}";
-        const offerConfirmationGateWay="{{url("http://127.0.0.1:8000/admin/offerConfirmation")}}";
-        const repairsConfirmationGateWay="{{url("http://127.0.0.1:8000/admin/repairsConfirmation")}}";
-        const reportsConfirmationGateWay="{{url("http://127.0.0.1:8000/admin/reportConfirmation")}}";
+        const accountConfirmationGateWay="{{url("admin/extendedUserConfirmation")}}";
+        const offerConfirmationGateWay="{{url("admin/offerConfirmation")}}";
+        const repairsConfirmationGateWay="{{url("admin/repairsConfirmation")}}";
+        const reportsConfirmationGateWay="{{url("admin/reportConfirmation")}}";
 
-        const usersListGateWay="{{url("http://127.0.0.1:8000/admin/usersList")}}";
+        const usersListGateWay="{{url("admin/usersList")}}";
+
+        const storeManufacturerGateWay="{{url("/admin/carInfo/storeManufacturer")}}";
+        const storeModelGateWay="{{url("/admin/carInfo/storeModel")}}";
+        const storeVersionGateWay="{{url("/admin/carInfo/storeVersion")}}";
+        const storeCarEquipmentGateWay="{{url("/admin/createCarEquipment")}}"
 
     </script>
     <!-- Scripts -->

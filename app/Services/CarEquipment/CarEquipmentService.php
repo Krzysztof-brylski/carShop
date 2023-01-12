@@ -13,7 +13,7 @@ class CarEquipmentService{
      * @param array $data
      */
     public function store(array $data){
-        $equipment=CarEquipment::create($data);
+        $equipment=CarEquipment::create(['name'=>$data['equipment']]);
         $equipment->save();
     }
 
