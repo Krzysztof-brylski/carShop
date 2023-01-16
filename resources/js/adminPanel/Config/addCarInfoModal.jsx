@@ -23,23 +23,13 @@ export function AddCarInfoModal({display,data,setDisplay}) {
         inset:`${window.scrollY}px 0 0 0 `
     };
     const sendRequest=()=>{
-        var requestUrl="";
-
-        if(data.manufacturer === null){
-            requestUrl=storeManufacturerGateWay;
-
-        }else if(data.model === null){
-            requestUrl=storeModelGateWay;
-        }else if(data.version === null){
-            requestUrl=storeVersionGateWay;
-        }
         var formData= new FormData();
 
         formData.append("_token",crsfToken);
         formData.append("manufacturer",manufacturer);
         formData.append("model",model);
         formData.append("version",version);
-        axios.post(requestUrl,formData).then((res)=>{
+        axios.post(`/admin/carInfo/${manufacturer}/${model}/${version}`,formData).then((res)=>{
             console.log(res);
            //todo success or error modal
         });

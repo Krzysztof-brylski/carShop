@@ -60,6 +60,9 @@ class User extends Authenticatable
     public function isAdmin(){
         return $this->accountRole == "admin";
     }
+    public function isExtended(){
+        return $this->accoutType == "extended";
+    }
     public function confirm(){
         //todo change acc type confirmation
     }

@@ -17,8 +17,7 @@ class CarEquipmentController extends Controller
      * @return JsonResponse
      */
     public function index(){
-        $result=(new AdminPanelTableDTO(  CarEquipment::paginate(9,['id','name']),
-            get_class_methods(CarEquipmentService::class)))->data;
+        $result=CarEquipment::all(['id','name'])->toArray();
         return Response()->json($result,200);
     }
     public function delete(CarEquipment $CarEquipment){

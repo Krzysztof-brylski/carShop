@@ -33,7 +33,7 @@ class CarInfoService{
         $manufacturer = CarManufacturer::where("name","=",$manufacturerName)->first();
         $model=new CarModel();
         $model->name=$data['model'];
-        $manufacturer->Model()->save($model);
+        $manufacturer->carModels()->save($model);
     }
 
     /**
@@ -46,7 +46,7 @@ class CarInfoService{
         $model = CarModel::where("name","=",$modelName)->first();
         $version = new CarVersion();
         $version->name=$data['version'];
-        $model->Version()->save($version);
+        $model->carVersions()->save($version);
     }
 
 

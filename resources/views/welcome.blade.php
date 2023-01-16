@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @viteReactRefresh
 @vite(['resources/css/app.css'])
-@vite(['resources/js/Offer/Searching/Searching.jsx'])
+@vite(['resources/js/LandingPage/landingPage.jsx'])
 @section('content')
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -20,11 +20,7 @@
     </head>
 
     <body>
-        <div class="row">
-            <div id="offerSearching" class="col-xl-6 d-flex p-4 justify-center align-items-center">
-
-            </div>
-        </div>
+       <div id="LandingPage"></div>
     </body>
 </html>
 @endsection

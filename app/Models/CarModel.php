@@ -14,10 +14,10 @@ class CarModel extends Model
         'car_manufacturer_id',
         'name'
     ];
-    public function Manufacturer(){
+    public function carManufacturer(){
         return $this->belongsTo(CarManufacturer::class);
     }
-    public function Version(){
+    public function carVersions(){
         return $this->hasMany(CarVersion::class);
     }
 

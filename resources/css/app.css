@@ -38,3 +38,6 @@ body{
     height: 50px;
     cursor: pointer;
 }
+.cursor-pointer{
+    cursor: pointer!important;
+}

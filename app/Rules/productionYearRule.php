@@ -27,7 +27,7 @@ class productionYearRule implements Rule
     {
         $minDate=date("Y",strtotime('-80 year'));
         $maxDate=date("Y");
-        return ($minDate<=$value and $value<=$maxDate);
+        return ($minDate>=$value and $value<=$maxDate);
     }
 
     /**

@@ -10,11 +10,23 @@ export function OfferSearching() {
     const [manufacturer,setManufacturer]=useState(null);
     const [model,setModel]=useState(null);
     const [version,setVersion]=useState(null);
-    const [price,setPrice]=useState({});
-    const [productionYear,setProductionYear]=useState({});
-    const [mileage,setMileage]=useState({});
+    const [priceMin,setPriceMin]=useState(0);
+    const [priceMax,setPriceMax]=useState(100000000);
+    const [productionYearMin,setProductionMinYear]=useState(1980);
+    const [productionYearMax,setProductionMaxYear]=useState(2023);
+    const [mileageMin,setMileageMin]=useState(0);
+    const [mileageMax,setMileageMax]=useState(100000000);
+    const handle=()=>{
+        let params=`priceMin=${priceMin}&priceMax=${priceMax}
+        &productionYearMin=${productionYearMin}&productionYearMax=${productionYearMax}
+        &mileageMin=${mileageMin}&mileageMax=${mileageMax}
+        `;
+        let url = `search/${manufacturer}/${model}/${version}/?`+params;
+        window.location.href = url;
+    };
+
     return(
-        <div className="row">
+        <div className="row justify-content-center p-2 m-5 bg-white rounded">
             <h3>Powiedz nam jakiego auta szukasz</h3>
             <div className="col-xl-6">
                 <span>Marka samochodu</span>
@@ -61,10 +73,10 @@ export function OfferSearching() {
                     </select>
                 </div>
             </div>
-            <button className="btn btn-primary w-25">Szukaj</button>
+            <button className="btn btn-primary w-25" onClick={handle}>Szukaj</button>
         </div>
     );
 
 
 }
-ReactDOM.render(<OfferSearching/>,document.querySelector('#offerSearching'));
+

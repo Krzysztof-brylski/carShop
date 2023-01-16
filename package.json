@@ -23,6 +23,7 @@
         "@fortawesome/free-solid-svg-icons": "^6.2.1",
         "@fortawesome/react-fontawesome": "^0.2.0",
         "@react-google-maps/api": "^2.17.1",
+        "multiselect-react-dropdown": "^2.0.25",
         "react-bootstrap": "^2.7.0",
         "react-dropzone": "^14.2.3"
     }

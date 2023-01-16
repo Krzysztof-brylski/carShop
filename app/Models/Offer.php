@@ -13,6 +13,7 @@ class Offer extends Model
         'author',
         'details',
         'carInfo',
+        'equipment',
         'price',
         'description',
         'localization',
@@ -25,6 +26,8 @@ class Offer extends Model
         $this->status="confirmed";
         $this->save();
     }
+
+    
 
     use HasFactory;
 }

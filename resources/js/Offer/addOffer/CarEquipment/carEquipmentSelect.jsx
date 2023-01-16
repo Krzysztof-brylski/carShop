@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useState, useEffect} from "react";
+import Multiselect from 'multiselect-react-dropdown';
 import axios from "axios";
 
 /**
@@ -7,24 +8,18 @@ import axios from "axios";
  * @param setData
  * @constructor
  */
-export function CarEquipmentSelect({}) {
-    const [dataSrc,setDataSrc]=useState(CarEquipmentGateWay);
+export function CarEquipmentSelect({setCarEquipment}) {
     const [data,setData]=useState([]);
     const[control,setControl]=useState([]);
-    useEffect(()=>{
-        axios.get(dataSrc).then((res)=>{
-            if(res.data.paginator.data.length !== 0){
-                setData(res.data.paginator.data);
-                setControl(res.data.paginator.links);
-            }
-        });
-    },[dataSrc]);
 
-    const changePage=(source)=>{
-        if(source !== null){
-            setDataSrc(source);
-        }
-    };
+
+    useEffect(()=>{
+        axios.get(CarEquipmentGateWay).then((res)=>{
+            setData(res.data);
+        });
+    },[]);
+
+
     const paginatorStyle={
         display:"flex",
         justifyContent:"center",
@@ -38,27 +33,22 @@ export function CarEquipmentSelect({}) {
         cursor:"pointer",
     };
 
-    return(
-        <div className="row h-25 overflowY-scroll">
-            {
-                data.map((element)=>{
-                    return(
-                        <div className="col-xl-6">
-                            <input type="checkbox"/>
-                            <span className="mx-2">{element.name}:</span>
-                        </div>
-                        );
-                })
-            }
+    const handleSelect=(selectedList, selectedItem)=>{
+        setCarEquipment(selectedList);
+    };
 
-            <div className="d-flex justify-content-center">
-                {control.map((element)=>{
-                    return ( <span
-                        style={paginatorStyle}
-                        onClick={()=>changePage(element.url)}
-                    >{element.label}</span>);
-                })}
-            </div>
+    return(
+        <div className="row h-25 overflowY-scroll w-100">
+            {
+                data.length !==0 &&
+                <Multiselect
+                    options={data}
+                    onSelect={handleSelect}
+                    onRemove={handleSelect}
+                    displayValue="name"
+                    style={{multiselectContainer:{width: "100%"}}}
+                />
+            }
         </div>
     )
 

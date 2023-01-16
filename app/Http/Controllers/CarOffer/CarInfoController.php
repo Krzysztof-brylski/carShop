@@ -9,6 +9,7 @@ use App\Http\Requests\CarInfo\CreateCarModelRequest;
 use App\Http\Requests\CarInfo\CreateCarVersionRequest;
 use App\Models\CarManufacturer;
 use App\Models\CarModel;
+use App\Models\CarVersion;
 use App\Services\CarInfo\CarInfoService;
 use \Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -43,7 +44,7 @@ class CarInfoController extends Controller
      */
     public function showModels(CarManufacturer $CarManufacturer){
         try{
-            $result=(new CarModelsDTO($CarManufacturer->Model))->CarModels;
+            $result=(new CarModelsDTO($CarManufacturer->carModels))->CarModels;
         }catch (\Exception $exception){
             return Response()->json("BadRequest",400);
         }finally{
@@ -59,7 +60,7 @@ class CarInfoController extends Controller
      */
     public function showVersions(CarModel $CarModel){
         try{
-            $result=(new CarVersionsDTO($CarModel->Version))->CarVersions;
+            $result=(new CarVersionsDTO($CarModel->carVersions))->CarVersions;
         }catch (\Exception $exception){
             return Response()->json("BadRequest",400);
         }finally{
@@ -102,4 +103,5 @@ class CarInfoController extends Controller
         (new CarInfoService())->storeVersion($data);
         return Response()->json("ok",201);
     }
+
 }

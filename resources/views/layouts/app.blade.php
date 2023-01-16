@@ -20,6 +20,8 @@
         const VersionGateWay="{{url("carInfo/version/")}}";
         const CreateOfferGateWay="{{route("Offer.store")}}";
         const CarEquipmentGateWay="{{url("carEquipment/")}}";
+        const Storage='{{asset('storage/')}}';
+        const ShowOffer='{{url('Offer/')}}';
     </script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
@@ -63,14 +65,15 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{route("Offer.create")}}">Dodaj ogłoszenie</a>
+                                    <a class="dropdown-item" href="{{route("myOffers")}}">Moje ogłoszenia</a>
+                                    <a class="dropdown-item" href="{{route("extendedUserPanel")}}">Konto firmowe</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         Wyloguj
                                     </a>
-                                    <a class="dropdown-item" href="#">Moje ogłoszenia</a>
-                                    <a class="dropdown-item" href="#">Konto firmowe</a>
-                                    <a class="dropdown-item" href="#">Płatności</a>
+
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>

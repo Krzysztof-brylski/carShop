@@ -32,6 +32,9 @@ function AddOffer() {
         carImages.map((image)=>{
             formData.append("images[]",image);
         });
+        carEquipment.map((element)=>{
+            formData.append("equipment[]",element.name);
+        });
         formData.append("carPower",carDetails.enginePower);
         formData.append("engineSize",carDetails.engineSize);
         formData.append("engineType",carDetails.fuel);
@@ -40,7 +43,7 @@ function AddOffer() {
         formData.append("mileage",carDetails.mileage);
         formData.append("phone",offerContact.phone);
         formData.append("email",offerContact.email);
-        formData.append("equipment",carEquipment);
+
         formData.append("localization",offerLocalization);
         formData.append("price",offerPrice);
         axios.post(CreateOfferGateWay,formData).then(()=>{

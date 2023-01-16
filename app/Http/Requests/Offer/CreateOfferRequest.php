@@ -44,7 +44,7 @@ class CreateOfferRequest extends FormRequest
             'engineType'=>['required','string', new engineTypeRule()],
             'transmission'=>['required','string', new transmissionTypeRule()],
             'equipment'=>'required',
-            'equipment.*'=>'exists:App\Models\CarEquipment, name|max:50',
+            'equipment.*'=>'exists:App\Models\CarEquipment,name|max:50',
             'phone'=>'required|string|max:9|min:9',
             'email'=>'required|string|email',
             'localization'=>'required|string',

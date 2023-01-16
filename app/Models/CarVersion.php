@@ -14,7 +14,7 @@ class CarVersion extends Model
         'model_id',
         'name'
     ];
-    public function Model(){
+    public function carModel(){
         return $this->belongsTo(CarModel::class);
     }
 

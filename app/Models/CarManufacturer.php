@@ -14,7 +14,7 @@ class CarManufacturer extends Model
         'name'
     ];
 
-    public function Model(){
+    public function carModels(){
         return $this->hasMany(CarModel::class);
     }
     use HasFactory;

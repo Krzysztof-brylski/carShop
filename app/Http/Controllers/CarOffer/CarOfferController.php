@@ -6,7 +6,11 @@ use App\Exceptions\OfferException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Offer\CreateOfferRequest;
 use App\Http\Requests\Offer\UpdateOfferRequest;
+use App\Http\Requests\Search\SearchRequest;
 use App\Http\Requests\Search\SerachRequest;
+use App\Models\CarManufacturer;
+use App\Models\CarModel;
+use App\Models\CarVersion;
 use App\Models\Offer;
 use App\Services\CarOffer\CarOfferService;
 use App\Services\Searching\SearchingService;
@@ -14,6 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Nette\Utils\Paginator;
 
 class CarOfferController extends Controller
 {
@@ -37,14 +42,34 @@ class CarOfferController extends Controller
     /**
      * Display a listing of the resources matching filters.
      *
-     * @param SerachRequest $request
+     * @param CarManufacturer $CarManufacturer
+     * @param CarModel $CarModel
+     * @param CarVersion $CarVersion
+     * @param Request $request
+     * @return void
+     */
+    public function search(CarManufacturer $CarManufacturer,CarModel $CarModel,CarVersion $CarVersion,Request $request){
+        $data=$request->all();
+        $result=(new CarOfferService)->search($CarManufacturer,$CarModel,$CarVersion,$data);
+        if($request->wantsJson()){
+            return Response()->json($result,200);
+        }
+        return view("offers/index",["offers"=>$result]);
+    }
+
+
+    /**
+     * Display a list of featured offers.
+     *
      * @return Response
      */
-    public function searchOffer(SerachRequest $request){
-        $data=$request->validated();
-        $query=(new SearchingService())->applyFilters($data);
-        return response()->json($query->paginate($data['paginate']),200);
+    public function featuredOffers(){
+        $result=Offer::where("type","=","extended")->orderBy("price","desc")->limit(12)
+            ->get(['id','carInfo','price','details.engineType','details.productionYear','details.mileage','images'])
+            ->toArray();
+        return response()->json($result,200);
     }
+
 
     /**
      * Show the form for creating a new resource.
