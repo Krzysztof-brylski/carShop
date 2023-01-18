@@ -6,12 +6,15 @@ export default defineConfig({
     plugins: [
         laravel({
             input: [
+                'node_modules/react-image-gallery/styles/scss/image-gallery.scss',
                 'resources/sass/app.scss',
                 'resources/css/app.css',
                 'resources/js/app.js',
             ],
+
             refresh: true,
         }),
+
         react(),
     ],
 });

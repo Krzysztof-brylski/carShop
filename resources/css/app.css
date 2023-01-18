@@ -41,3 +41,10 @@ body{
 .cursor-pointer{
     cursor: pointer!important;
 }
+@import "~react-image-gallery/styles/css/image-gallery.css";
+.slide_style{
+    width:1000px!important;
+    height:600px!important;
+    max-width:1000px!important;
+    max-height:600px!important;
+}

@@ -5,6 +5,7 @@
 </script>
 
 @viteReactRefresh
+@vite('resources/css/app.css')
 @vite('resources/js/Offer/Slider/offerImageSlider.jsx')
 @section('content')
 

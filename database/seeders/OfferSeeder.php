@@ -89,7 +89,7 @@ class OfferSeeder extends Seeder
             'price'=>40000,
             'description'=>"bardziej super poteżny opis",
             'localization'=>"(19.2,19.2)",
-            'images'=>['OfferImages/a4b8.jpg',"OfferImages/a4b8v2.jpg"],
+            'images'=>['OfferImages/audia4b8.jpg',"OfferImages/audia4b8v2.jpg","OfferImages/audia4b8v3.jpg"],
         ));
 
         //audi a3
