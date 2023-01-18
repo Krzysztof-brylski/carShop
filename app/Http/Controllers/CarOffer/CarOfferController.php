@@ -12,6 +12,7 @@ use App\Models\CarManufacturer;
 use App\Models\CarModel;
 use App\Models\CarVersion;
 use App\Models\Offer;
+use App\Models\User;
 use App\Services\CarOffer\CarOfferService;
 use App\Services\Searching\SearchingService;
 use Illuminate\Http\Request;
@@ -110,7 +111,8 @@ class CarOfferController extends Controller
             return response()->json($Offer,200);
         }
         return view('offers/show',[
-            'Offer'=>$Offer
+            'Offer'=>$Offer,
+            "User"=>$Offer->getAuthor(),
         ]);
     }
 

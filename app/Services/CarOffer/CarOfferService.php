@@ -77,12 +77,12 @@ class CarOfferService{
         $Offer->delete();
     }
     public function applyFilters(\Illuminate\Database\Query\Builder $builder, Array $filters){
+
         if(isset($filters['priceMin']) and isset($filters['priceMax'])){
             $builder=$builder->whereBetween('price',[(int)$filters['priceMin'], (int)$filters['priceMax']]);
 
         }if(isset($filters['productionYearMin']) and isset($filters['productionYearMax']) ){
             $builder=$builder->whereBetween('details.productionYear',[(int)$filters['productionYearMin'], (int)$filters['productionYearMax']]);
-
         }
         if(isset($filters['mileageMin']) and isset($filters['mileageMax']) ){
             $builder=$builder->whereBetween('details.mileage',[(int)$filters['mileageMin'], (int)$filters['mileageMax']]);

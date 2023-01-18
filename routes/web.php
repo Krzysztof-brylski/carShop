@@ -41,8 +41,9 @@ Route::get("/carInfo/version/{CarModel:name}",[CarInfoController::class,'showVer
 Route::get("/carEquipment",[CarEquipmentController::class,'index'])->name("carEquipment.index");
 Route::get("Offer/featured",[CarOfferController::class,'featuredOffers'])->name("Offer.featured");
 Route::get("/search/{CarManufacturer:name?}/{CarModel:name?}/{CarVersion:name?}",[CarOfferController::class,'search'])->name("Offer.search")->scopeBindings();
+Route::get("Offer/{Offer}",[CarOfferController::class,'show'])->name("Offer.show");
 Route::middleware('auth')->group(function (){
-    Route::resource('Offer', CarOfferController::class);
+    Route::resource('Offer', CarOfferController::class)->except("show");
     /**admin actions**/
     Route::middleware('user.admin')->group(function (){
         Route::get("/admin",[AdminController::class,'index'])->name("admin.index");
