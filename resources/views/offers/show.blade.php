@@ -29,7 +29,7 @@
                             @foreach($Offer->details as $key=>$details)
 
                                 <div class="col-xl-6">
-                                    <span class="opacity-50">{{$key}}:</span>
+                                    <span class="opacity-50">{{__("offer.$key")}}</span>
                                     <span class="fw-bold" style="color: blue">{{$details}}</span>
                                 </div>
                             @endforeach
