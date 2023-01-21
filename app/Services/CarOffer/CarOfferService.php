@@ -116,4 +116,17 @@ class CarOfferService{
         $result=$result->get(['carInfo'])->toArray();
         return $result;
     }
+
+    public function changeStatus($status,Offer $Offer,$requestAuthor){
+        if($Offer->author['id'] != $requestAuthor or $Offer->status == "inactive" or $Offer->status == "ban"){
+            throw new \Exception("Error");
+        }
+        if($Offer->status ==  $status){
+            $Offer->status="active";
+        }else{
+            $Offer->status=$status;
+        }
+        $Offer->save();
+    }
+
 }

@@ -2,6 +2,7 @@ import React,{useState} from 'react';
 
 export function OfferThumbnail({data}) {
     return(
+
         <div className="card m-3 p-0 cursor-pointer" style={{width: "19rem"}}>
             <a href={ShowOffer+"/"+data._id} className="w-100 h-100 text-decoration-none text-black">
             <div className="card-img-top " style={{height:"60%"}}>
@@ -19,7 +20,15 @@ export function OfferThumbnail({data}) {
                     {data.details.engineType}
 
                 </p>
-                <span className="my-2 h5 text-center" style={{color:"red"}}>{data.price} PLN</span>
+                {
+                    data.status !=="active"&&
+                    <span className="my-2 h5 text-center" style={{color:"red"}}>Zarezerwowano</span>
+                }
+                {
+                    data.status ==="active" &&
+                    <span className="my-2 h5 text-center" style={{color:"red"}}>{data.price} PLN</span>
+                }
+
             </div>
             </a>
         </div>

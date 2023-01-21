@@ -83,12 +83,18 @@
                     <p>{{$Offer->details['productionYear']}} - {{$Offer->details['mileage']}}Km - {{$Offer->details['engineType']}} - {{$Offer->details['enginePower']}}Hp </p>
                 </div>
                 <div>
-                    <span class="h3 fw-bold" style="color: red">
+                    @if($Offer->status == "reserved" or $Offer->status == "sold")
+                        <span class="h3 fw-bold" style="color: red">
+                            ZAREZERWOWANO
+                        </span>
+                    @else
+                        <span class="h3 fw-bold" style="color: red">
                         {{$Offer->price}}
-                    </span>
-                    <span class="h4" style="color: red">
+                        </span>
+                        <span class="h4" style="color: red">
                         PLN
-                    </span>
+                        </span>
+                    @endif
                 </div>
                 <div class="my-3 p-3" style="border: 1px solid black; border-radius: 15px">
                     <div>
@@ -100,9 +106,9 @@
                         </div>
                         <div class="my-3 d-flex flex-column">
                             <span>Dane kontaktowe:</span>
-                            <button class="btn-primary btn my-2">Nr telefonu </button>
+                            <button class="btn-primary btn my-2" @if($Offer->status == "reserved" or $Offer->status == "sold")disabled @endif>Nr telefonu </button>
 
-                            <button class="btn-danger btn my-2">E-mail</button>
+                            <button class="btn-danger btn my-2" @if($Offer->status == "reserved" or $Offer->status == "sold")disabled @endif>E-mail</button>
                         </div>
                     </div>
 

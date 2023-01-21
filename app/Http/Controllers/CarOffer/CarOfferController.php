@@ -17,6 +17,7 @@ use App\Services\CarOffer\CarOfferService;
 use App\Services\Searching\SearchingService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Nette\Utils\Paginator;
@@ -30,14 +31,10 @@ class CarOfferController extends Controller
      * @return Response | View
      */
     public function index(Request $request){
-        //todo pagination
-        $data=Offer::all()->first();
-        if($request->wantsJson()){
-            return response()->json(array(),200);
-        }
-        return view('offers/index',[
-            'data'=>$data,
-        ]);
+        $result=Offer::where("type","=","extended")->orderBy("price","desc")->limit(12)
+            ->get(['id','status','carInfo','price','details.engineType','details.productionYear','details.mileage','images'])
+            ->toArray();
+        return response()->json($result,200);
     }
 
     /**
@@ -57,21 +54,6 @@ class CarOfferController extends Controller
         }
         return view("offers/index",["offers"=>$result]);
     }
-
-
-    /**
-     * Display a list of featured offers.
-     *
-     * @return Response
-     */
-    public function featuredOffers(){
-        $result=Offer::where("type","=","extended")->orderBy("price","desc")->limit(12)
-            ->get(['id','carInfo','price','details.engineType','details.productionYear','details.mileage','images'])
-            ->toArray();
-        return response()->json($result,200);
-    }
-
-
     /**
      * Show the form for creating a new resource.
      *
@@ -149,6 +131,35 @@ class CarOfferController extends Controller
     }
 
     /**
+     * @param Offer $Offer
+     * @return JsonResponse
+     */
+    public function markReserved(Offer $Offer){
+        try{
+            (new CarOfferService())->changeStatus("reserved",$Offer,Auth::id());
+        }catch (\Exception $exception) {
+            abort(403);
+        }finally{
+            return back()->with('status','Status oferty został zmieniony')->with('error',false);
+        }
+
+    }
+
+    /**
+     * @param Offer $Offer
+     * @return JsonResponse
+     */
+    public function markSold(Offer $Offer){
+        try{
+            (new CarOfferService())->changeStatus("sold",$Offer,Auth::id());
+        }catch (\Exception $exception) {
+            abort(403);
+        }finally{
+            return back()->with('status','Status oferty został zmieniony')->with('error',false);
+        }
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param Offer $Offer
@@ -159,9 +170,9 @@ class CarOfferController extends Controller
         try{
             (new CarOfferService())->destroy($Offer);
         }catch (OfferException $exception){
-            return Response()->json("error",500);
+            return back()->with('status','Wystąpił błąd')->with('error',true);
         }finally{
-            return back();
+            return back()->with('status','Oferta została usunięta')->with('error',false);
         }
     }
 }

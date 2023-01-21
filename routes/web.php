@@ -39,7 +39,6 @@ Route::get("/carInfo/manufacturer",[CarInfoController::class,'showManufacturers'
 Route::get("/carInfo/model/{CarManufacturer:name}",[CarInfoController::class,'showModels'])->name('carInfo.showModels');
 Route::get("/carInfo/version/{CarModel:name}",[CarInfoController::class,'showVersions'])->name('carInfo.showVersions');
 Route::get("/carEquipment",[CarEquipmentController::class,'index'])->name("carEquipment.index");
-Route::get("Offer/featured",[CarOfferController::class,'featuredOffers'])->name("Offer.featured");
 Route::get("/search/{CarManufacturer:name?}/{CarModel:name?}/{CarVersion:name?}",[CarOfferController::class,'search'])->name("Offer.search")->scopeBindings();
 Route::get("Offer/{Offer}",[CarOfferController::class,'show'])->name("Offer.show");
 Route::middleware('auth')->group(function (){
@@ -94,4 +93,6 @@ Route::middleware('auth')->group(function (){
     /**all users actions**/
     Route::get("/myOffers",[\App\Http\Controllers\HomeController::class,'myOffers'])->name("myOffers");
     Route::get("/extendedUserPanel",[\App\Http\Controllers\HomeController::class,'extendedUserPanel'])->name("extendedUserPanel");
+    Route::post("Offer/markReserved/{Offer}",[CarOfferController::class,'markReserved'])->name("Offer.reserve");
+    Route::post("Offer/markSold/{Offer}",[CarOfferController::class,'markSold'])->name("Offer.sold");
 });

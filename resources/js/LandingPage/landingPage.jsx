@@ -7,12 +7,11 @@ function LandingPage() {
 
     const [data,setData]=useState([]);
     useEffect(()=>{
-        axios.get("Offer/featured").then((res)=>{
+        axios.get("Offer").then((res)=>{
             setData(res.data);
 
         });
     },[]);
-    console.log(data)
     return(
         <div className="row">
             <div className="col-xl-6">
