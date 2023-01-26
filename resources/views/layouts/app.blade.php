@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <script src="https://kit.fontawesome.com/7a1ae6883e.js" crossorigin="anonymous"></script>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -65,7 +65,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route("Offer.create")}}">Dodaj ogłoszenie</a>
+                                    <a class="dropdown-item" href="{{route("Offer.select")}}">Dodaj ogłoszenie</a>
                                     <a class="dropdown-item" href="{{route("myOffers")}}">Moje ogłoszenia</a>
                                     <a class="dropdown-item" href="{{route("extendedUserPanel")}}">Konto firmowe</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

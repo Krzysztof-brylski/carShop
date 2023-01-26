@@ -10,6 +10,8 @@ use App\Http\Controllers\CarOffer\CarEquipmentController;
 use App\Http\Controllers\CarOffer\CarInfoController;
 use App\Http\Controllers\CarOffer\CarOfferController;
 
+use App\Http\Controllers\fakePaymentsController;
+use App\Http\Controllers\paymentController;
 use App\Models\Admin\ExtendedUserConfirmation;
 use App\Models\Admin\RepairConfirmation;
 use App\Models\CarEquipment;
@@ -41,8 +43,11 @@ Route::get("/carInfo/version/{CarModel:name}",[CarInfoController::class,'showVer
 Route::get("/carEquipment",[CarEquipmentController::class,'index'])->name("carEquipment.index");
 Route::get("/search/{CarManufacturer:name?}/{CarModel:name?}/{CarVersion:name?}",[CarOfferController::class,'search'])->name("Offer.search")->scopeBindings();
 Route::get("Offer/{Offer}",[CarOfferController::class,'show'])->name("Offer.show");
+Route::post("/pay/update/{Payments:token}",[PaymentController::class,'updatePaymentStatus'])->name("update.payment");
+Route::get("Offer",[CarOfferController::class,'index'])->name("Offer.index");
 Route::middleware('auth')->group(function (){
-    Route::resource('Offer', CarOfferController::class)->except("show");
+    Route::get("select/offer",[CarOfferController::class,'select'])->name("Offer.select");
+    Route::resource('Offer', CarOfferController::class)->except(["show","index","create"]);
     /**admin actions**/
     Route::middleware('user.admin')->group(function (){
         Route::get("/admin",[AdminController::class,'index'])->name("admin.index");
@@ -95,4 +100,9 @@ Route::middleware('auth')->group(function (){
     Route::get("/extendedUserPanel",[\App\Http\Controllers\HomeController::class,'extendedUserPanel'])->name("extendedUserPanel");
     Route::post("Offer/markReserved/{Offer}",[CarOfferController::class,'markReserved'])->name("Offer.reserve");
     Route::post("Offer/markSold/{Offer}",[CarOfferController::class,'markSold'])->name("Offer.sold");
+
+    //totally not fake payments
+    Route::post("/pay/establish",[PaymentController::class,'establishPayment'])->name("establish.payment");
+
+
 });

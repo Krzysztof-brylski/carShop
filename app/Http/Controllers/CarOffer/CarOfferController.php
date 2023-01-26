@@ -59,8 +59,27 @@ class CarOfferController extends Controller
      *
      * @return View
      */
-    public function create(){
-        return view('offers/create');
+    public function select(){
+        return view('offers/select');
+    }
+
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return View
+     */
+    public function createStandard(){
+        return view('offers/select');
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return View
+     */
+    public function createPremium(){
+        return view('offers/select');
     }
 
     /**

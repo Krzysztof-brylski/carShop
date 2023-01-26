@@ -23,7 +23,7 @@
                         <td class="d-flex">
                             <a href="{{route("Offer.show",['Offer'=>$offer->id])}}" class="btn btn-primary">Zobacz</a>
                             <a href="{{route("Offer.edit",['Offer'=>$offer->id])}}" class="btn btn-warning">Edytuj</a>
-                            @if($offer->status == "standard")
+                            @if($offer->type == "standard")
                                 <a class="btn btn-info">Ulepsz</a>
                             @endif
                             <form action="{{route("Offer.destroy",['Offer'=>$offer->id])}}" method="post">

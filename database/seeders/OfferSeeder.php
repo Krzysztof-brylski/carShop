@@ -95,7 +95,7 @@ class OfferSeeder extends Seeder
         //audi a3
         Offer::firstOrCreate(array(
             'status'=>'active',
-            'type'=>'extended',
+            'type'=>'standard',
             'author'=>array(
                 "id"=>"63b442af0b45feb5490950a4",
                 "email"=>"mike@test.pl",
@@ -380,7 +380,7 @@ class OfferSeeder extends Seeder
 
         Offer::firstOrCreate(array(
             'status'=>'active',
-            'type'=>'extended',
+            'type'=>'standard',
             'author'=>array(
                 "id"=>"63b442af0b45feb5490950a4",
                 "email"=>"mike@test.pl",

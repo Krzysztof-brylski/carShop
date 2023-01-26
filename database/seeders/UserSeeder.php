@@ -22,6 +22,9 @@ class UserSeeder extends Seeder
             'name'=>'mike',
             'email'=>'mike@test.pl',
             'password'=>Hash::make('password'),
+            'offerToken'=>0,
+            'extendedOfferToken'=>0,
+            'offersCredit'=>0,
             'accountType'=>'standard',
             'accountRole'=>'standard'
         ]);
@@ -30,6 +33,9 @@ class UserSeeder extends Seeder
             'name'=>'bob',
             'email'=>'bob@test.pl',
             'password'=>Hash::make('password'),
+            'offerToken'=>0,
+            'extendedOfferToken'=>0,
+            'offersCredit'=>0,
             'accountType'=>'extended',
             'accountRole'=>'standard'
         ]);
@@ -37,6 +43,9 @@ class UserSeeder extends Seeder
             'name'=>'jerry',
             'email'=>'jerry@test.eu',
             'password'=>Hash::make('password'),
+            'offerToken'=>0,
+            'extendedOfferToken'=>0,
+            'offersCredit'=>0,
             'accountType'=>'baned',
             'accountRole'=>'standard'
         ]);
@@ -45,6 +54,9 @@ class UserSeeder extends Seeder
             'name'=>'test',
             'email'=>'test@test2.eu',
             'password'=>Hash::make('testtest'),
+            'offerToken'=>0,
+            'extendedOfferToken'=>0,
+            'offersCredit'=>0,
             'accountType'=>'standard',
             'accountRole'=>'admin'
         ]);

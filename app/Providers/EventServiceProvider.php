@@ -4,8 +4,10 @@ namespace App\Providers;
 
 use App\Events\AdminCreateEvent;
 use App\Events\ConfirmationEvent;
+use App\Events\OfferPaymentStatusUpdateEvent;
 use App\Listeners\AdminCreateListener;
 use App\Listeners\ConfirmationListener;
+use App\Listeners\PaymentStatusUpdateListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -28,6 +30,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         ConfirmationEvent::class=>[
           ConfirmationListener::class,
+        ],
+        OfferPaymentStatusUpdateEvent::class=>[
+            PaymentStatusUpdateListener::class,
         ],
     ];
 

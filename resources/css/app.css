@@ -48,3 +48,7 @@ body{
     max-width:1000px!important;
     max-height:600px!important;
 }
+.add-offer-select-ul li{
+    inline-size: 300px;
+    overflow-wrap: break-word;
+}

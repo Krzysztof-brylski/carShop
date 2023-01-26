@@ -8,7 +8,7 @@
                 <h3>{{$offer['carInfo']['model']}}</h3>
                 <h4>{{$offer['carInfo']['version']}}</h4>
             </div>
-
+            <a href="{{route("Offer.create")}}">eeeeeeeeee</a>
         @endforeach
     </div>
 

@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-xl-12 my-3 py-3">
                         <hr class="w-100">
-                        <h4>Wyposarzenie:</h4>
+                        <h4>Wyposażenie:</h4>
                         <div class="row">
                             @foreach($Offer->equipment as $details)
 

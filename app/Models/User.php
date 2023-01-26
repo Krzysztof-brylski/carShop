@@ -22,6 +22,8 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'offerToken',
+        'extendedOfferToken',
         'offersCredit',
         'accountType',
         'accountRole',
@@ -65,5 +67,13 @@ class User extends Authenticatable
     }
     public function confirm(){
         //todo change acc type confirmation
+    }
+    public function addStandardOfferToken(){
+        $this->offerToken+=1;
+        $this->save();
+    }
+    public function addExtendedOfferToken(){
+        $this->extendedOfferToken+=1;
+        $this->save();
     }
 }
