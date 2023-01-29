@@ -70,7 +70,7 @@ class CarOfferController extends Controller
      * @return View
      */
     public function createStandard(){
-        return view('offers/select');
+        return view('offers/add/createStandard');
     }
 
     /**
@@ -78,8 +78,8 @@ class CarOfferController extends Controller
      *
      * @return View
      */
-    public function createPremium(){
-        return view('offers/select');
+    public function createExtended(){
+        return view('offers/add/createExtended');
     }
 
     /**

@@ -51,7 +51,7 @@
                 <form>
                     @csrf
                     <input type="number" name="toPay" value="60.99" hidden>
-                    <input type="text" name="type" value="offer" hidden>
+                    <input type="text" name="type" value="extendedOffer" hidden>
                     <input type="text" name="originUrl" value="{{url("/create/standard/offer")}}" hidden>
                     <button class="btn btn-primary">Wybieram</button>
                 </form>

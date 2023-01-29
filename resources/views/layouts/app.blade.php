@@ -65,7 +65,7 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{route("Offer.select")}}">Dodaj ogłoszenie</a>
+                                    <a class="dropdown-item" href="{{route("offer.select")}}">Dodaj ogłoszenie</a>
                                     <a class="dropdown-item" href="{{route("myOffers")}}">Moje ogłoszenia</a>
                                     <a class="dropdown-item" href="{{route("extendedUserPanel")}}">Konto firmowe</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"

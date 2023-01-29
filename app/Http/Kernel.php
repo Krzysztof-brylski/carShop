@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'user.extended'=>\App\Http\Middleware\AccountType\ExtendedUser::class,
         'user.admin'=>\App\Http\Middleware\AccountType\AdminUser::class,
-
+        'disable.payment'=>\App\Http\Middleware\DisablePayment::class,
+        'check.offer.token'=>\App\Http\Middleware\CheckAddOfferToken::class,
     ];
 }

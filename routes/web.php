@@ -46,7 +46,7 @@ Route::get("Offer/{Offer}",[CarOfferController::class,'show'])->name("Offer.show
 Route::post("/pay/update/{Payments:token}",[PaymentController::class,'updatePaymentStatus'])->name("update.payment");
 Route::get("Offer",[CarOfferController::class,'index'])->name("Offer.index");
 Route::middleware('auth')->group(function (){
-    Route::get("select/offer",[CarOfferController::class,'select'])->name("Offer.select");
+
     Route::resource('Offer', CarOfferController::class)->except(["show","index","create"]);
     /**admin actions**/
     Route::middleware('user.admin')->group(function (){
@@ -102,7 +102,18 @@ Route::middleware('auth')->group(function (){
     Route::post("Offer/markSold/{Offer}",[CarOfferController::class,'markSold'])->name("Offer.sold");
 
     //totally not fake payments
-    Route::post("/pay/establish",[PaymentController::class,'establishPayment'])->name("establish.payment");
+    Route::middleware("disable.payment")->group(function (){
+        Route::get("select/offer",[CarOfferController::class,'select'])->name("offer.select");
+        Route::post("/pay/establish",[PaymentController::class,'establishPayment'])->name("establish.payment");
+    });
+    Route::middleware(['disable.payment','check.offer.token'])->group(function (){
+        Route::get("/create/offer/standard",[CarOfferController::class,'createStandard'])->name("create.offer.standard")->middleware();
+        Route::get("/create/offer/extended",[CarOfferController::class,'createExtended'])->name("create.offer.extended")->middleware();
+    });
+
+
+
+
 
 
 });
